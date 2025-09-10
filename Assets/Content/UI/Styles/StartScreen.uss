@@ -1,0 +1,30 @@
+VisualElement {
+}
+
+.play-button {
+    display: flex;
+    position: absolute;
+    right: auto;
+    top: 80%;
+    left: 50%;
+    translate: -50% -50%;
+    rotate: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 20%;
+    height: 15%;
+    font-size: 200%;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-left-color: rgb(211, 218, 41);
+    border-right-color: rgb(211, 218, 41);
+    border-top-color: rgb(211, 218, 41);
+    border-bottom-color: rgb(211, 218, 41);
+    background-color: rgb(224, 183, 25);
+}
