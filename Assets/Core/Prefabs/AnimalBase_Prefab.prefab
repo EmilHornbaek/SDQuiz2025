@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6557638563587614108}
   - component: {fileID: -6413806140783621921}
   m_Layer: 0
-  m_Name: AnimalBase
+  m_Name: AnimalBase_Prefab
   m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

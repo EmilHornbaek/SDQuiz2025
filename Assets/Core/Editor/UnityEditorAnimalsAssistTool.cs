@@ -20,7 +20,7 @@ public class UnityEditorAnimalsAssistTool
 
     public static object CreateVariant(string variantName)
     {
-        string animalBasePrefabPath = "Assets/Core/Prefabs/AnimalBase.prefab";
+        string animalBasePrefabPath = "Assets/Core/Prefabs/AnimalBase_Prefab.prefab";
 
         GameObject animalBasePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(animalBasePrefabPath);
 
@@ -32,7 +32,7 @@ public class UnityEditorAnimalsAssistTool
         string folder = "Assets/Content/Animals";
 
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(animalBasePrefab);
-        string variantPath = AssetDatabase.GenerateUniqueAssetPath($"{folder}/{variantName}.prefab");
+        string variantPath = AssetDatabase.GenerateUniqueAssetPath($"{folder}/{variantName}_Prefab.prefab");
         GameObject variant = PrefabUtility.SaveAsPrefabAsset(instance, variantPath);
 
         Object.DestroyImmediate(instance);
