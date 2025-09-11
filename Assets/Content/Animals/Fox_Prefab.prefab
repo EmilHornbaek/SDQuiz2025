@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &89433927513537141
+--- !u!1001 &7988341626514186613
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,13 +8,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -6413806140783621921, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
-      propertyPath: AnimalData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4bf98d96b3c47f24bbdd04a2f163083f, type: 2}
     - target: {fileID: 1267397261318507695, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
       propertyPath: m_Name
-      value: Hippo_Prefab
+      value: Fox_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 8337918243798882482, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
       propertyPath: m_LocalPosition.x
