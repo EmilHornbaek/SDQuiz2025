@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7988341626514186613
+--- !u!1001 &2296871683045917375
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,10 +11,10 @@ PrefabInstance:
     - target: {fileID: -6413806140783621921, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
       propertyPath: AnimalData
       value: 
-      objectReference: {fileID: 11400000, guid: e83056043d568f94395e9de3082ac07e, type: 2}
+      objectReference: {fileID: 11400000, guid: 8afa983151eb83b4e83f92497f8f8760, type: 2}
     - target: {fileID: 1267397261318507695, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
       propertyPath: m_Name
-      value: Fox_Prefab
+      value: Parrot_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 8337918243798882482, guid: b9c8de23d45e4e5449ffbfe024c96c4f, type: 3}
       propertyPath: m_LocalPosition.x

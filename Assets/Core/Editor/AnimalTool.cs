@@ -37,5 +37,6 @@ public class AnimalTool : EditorWindow
         AnimalData data = UnityEditorAnimalsAssistTool.CreateData($"{animalName.value}_SO") as AnimalData;
         GameObject variant = UnityEditorAnimalsAssistTool.CreateVariant($"{animalName.value}") as GameObject;
         variant.GetComponent<Animal>().AnimalData = data;
+        PrefabUtility.SavePrefabAsset(variant);
     }
 }
