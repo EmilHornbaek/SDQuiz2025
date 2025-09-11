@@ -16,4 +16,14 @@ MonoBehaviour:
   Sprite: {fileID: 0}
   Sound: {fileID: 0}
   Facts: []
-  QuizQuestions: []
+  QuizQuestions:
+  - Question: What does the fox say?
+    Answers:
+    - Answer: REEEEEEEEE
+      Allowed: 1
+    - Answer: Hello, Ben
+      Allowed: 0
+    - Answer: I am your father
+      Allowed: 0
+    - Answer: Pa pa pa pa pa pa pow
+      Allowed: 0
