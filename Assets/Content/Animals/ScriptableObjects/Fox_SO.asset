@@ -20,10 +20,18 @@ MonoBehaviour:
   - Question: What does the fox say?
     Answers:
     - Answer: REEEEEEEEE
-      Allowed: 1
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
     - Answer: Hello, Ben
+      UsesImage: 0
+      Image: {fileID: 0}
       Allowed: 0
     - Answer: I am your father
+      UsesImage: 0
+      Image: {fileID: 0}
       Allowed: 0
     - Answer: Pa pa pa pa pa pa pow
+      UsesImage: 0
+      Image: {fileID: 0}
       Allowed: 0
