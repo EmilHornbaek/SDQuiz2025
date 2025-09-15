@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Content/UI/Styles/QuizScreen.uss?fileID=7433441132597879392&amp;guid=2d8ec18545f99134f82e4bff6d2bcc7d&amp;type=3#QuizScreen" />
     <ui:VisualElement style="flex-grow: 1;">
-        <ui:ProgressBar value="54.1" title="Timer" name="Timer" high-value="60" style="align-self: stretch; border-top-left-radius: 15px; border-top-right-radius: 15px; color: rgb(204, 153, 3);" />
+        <ui:ProgressBar value="54" title="54 sekunder" name="Timer" high-value="60" style="align-self: stretch; border-top-left-radius: 15px; border-top-right-radius: 15px; color: rgb(204, 153, 3);" />
         <ui:Label text="Label" name="QuestAmount" />
         <ui:Label text="Label" name="Question" style="height: 148px; -unity-font-style: bold; -unity-text-outline-color: rgb(204, 153, 3); -unity-text-outline-width: 0;" />
         <ui:Button text="Button" name="Answer" />
