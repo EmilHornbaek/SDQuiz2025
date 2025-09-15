@@ -1,0 +1,78 @@
+:root {
+}
+
+#Answer {
+    -unity-font-style: bold;
+    font-size: 15px;
+    color: rgb(204, 153, 3);
+    margin-bottom: 20px;
+    background-color: rgb(73, 103, 52);
+    -unity-text-align: middle-center;
+    -unity-text-outline-color: rgb(91, 91, 91);
+    -unity-text-outline-width: 0;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=d43e962d7c8731445af90b7ece668d49&type=3#NotInter-Regular");
+    word-spacing: 0;
+    letter-spacing: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left-color: rgb(204, 153, 3);
+    border-right-color: rgb(204, 153, 3);
+    border-top-color: rgb(204, 153, 3);
+    border-bottom-color: rgb(204, 153, 3);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    top: 30px;
+    -unity-slice-scale: 1px;
+}
+
+#Question {
+    background-color: rgb(73, 103, 52);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    bottom: 3px;
+    top: auto;
+    align-self: auto;
+    align-content: auto;
+    -unity-text-align: middle-center;
+    color: rgb(200, 151, 8);
+    -unity-font-style: normal;
+}
+
+#Timer {
+    bottom: auto;
+    top: auto;
+    position: relative;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgb(73, 103, 52);
+    background-color: rgb(73, 103, 52);
+    color: rgb(0, 0, 0);
+}
+
+#QuestAmount {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: rgb(73, 103, 52);
+    -unity-text-align: upper-center;
+    color: rgb(204, 153, 3);
+    -unity-font-style: bold;
+    top: -3px;
+}
