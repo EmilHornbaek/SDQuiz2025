@@ -13,7 +13,25 @@ MonoBehaviour:
   m_Name: Horse_SO
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
   Name: Horse
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2800000, guid: fef4045624d03d041ae9cbb5662c03c9, type: 3}
   Sound: {fileID: 0}
   Facts: []
-  QuizQuestions: []
+  QuizQuestions:
+  - Question: Neigh?
+    Answers:
+    - Answer: Yaaaaas
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
+    - Answer: Naaaaa
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Cudepoole
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Pissine
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fox_SO
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
   Name: Fox
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2800000, guid: fef4045624d03d041ae9cbb5662c03c9, type: 3}
   Sound: {fileID: 0}
   Facts: []
   QuizQuestions:
