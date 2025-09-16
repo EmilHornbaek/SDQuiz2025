@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 496816901}
   - component: {fileID: 496816900}
   - component: {fileID: 496816899}
+  - component: {fileID: 496816902}
   m_Layer: 5
   m_Name: PlayBtn
   m_TagString: Button
@@ -429,6 +430,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496816897}
   m_CullTransparentMesh: 1
+--- !u!114 &496816902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496816897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d4c3122a70b4c4d9ef53bc3ddae345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonMotionTrigger
+  lerpSwitch: 0
+  inverse: 0
+  newCameraTarget: {fileID: 0}
 --- !u!224 &782040555 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3524906715694872823, guid: df12deb0621f27742958790ba3b27257, type: 3}
@@ -1008,6 +1024,7 @@ GameObject:
   - component: {fileID: 1614842291}
   - component: {fileID: 1614842290}
   - component: {fileID: 1614842293}
+  - component: {fileID: 1614842294}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1133,6 +1150,21 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1614842294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614842289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69cc0944b6c0b1f40bf7248db10e8e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MotionSprite
+  targetTransform: {fileID: 0}
+  duration: 0
+  lerpCondition: 0
 --- !u!1 &1835504645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,6 +1264,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3524906715694872823, guid: 2b8860534be2bed45a4672e22cdbb062, type: 3}
   m_PrefabInstance: {fileID: 885921342}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1992898791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992898793}
+  - component: {fileID: 1992898792}
+  m_Layer: 0
+  m_Name: LerpHandler
+  m_TagString: LerpHandler
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1992898792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992898791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d7b4e1b11c3a747b7be2f3261f5144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!4 &1992898793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992898791}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.88, y: -0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1240,3 +1316,4 @@ SceneRoots:
   - {fileID: 1835504646}
   - {fileID: 1174808074}
   - {fileID: 382166618}
+  - {fileID: 1992898793}

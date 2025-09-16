@@ -6,10 +6,8 @@ TagManager:
   tags:
   - Button
   - Animal
-  - QuizUI
-  - AnimalSelectionUI
-  - StartScreenUI
-  - UI
+  - MovingElement
+  - LerpHandler
   layers:
   - Default
   - TransparentFX
