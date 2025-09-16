@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuizUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: numberOfQuestions
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7899907837563869260, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
