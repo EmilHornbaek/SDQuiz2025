@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 865524434875430058}
   - component: {fileID: 6306666827378968245}
   m_Layer: 5
-  m_Name: AnimalSelector
+  m_Name: AnimalSelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,6 +68,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c230b944a59e27f4c9f1be28e5128c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalSelector
-  aspectRatioX: 1
-  aspectRatioY: 1
-  width: 40

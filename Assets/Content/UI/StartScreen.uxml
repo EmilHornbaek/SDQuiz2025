@@ -1,5 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Content/UI/Styles/BaseStyle.uss?fileID=7433441132597879392&amp;guid=e4c141d730b04a74d9f5e9723e9c31c0&amp;type=3#BaseStyle" />
     <Style src="project://database/Assets/Content/UI/Styles/StartScreen.uss?fileID=7433441132597879392&amp;guid=cc0d48a769f19ae468839d93e60d6678&amp;type=3#StartScreen" />
-    <ui:Button text="Play" focusable="false" class="play-button" />
+    <Nullzone.Unity.UIElements.AspectRatioElement width="40" name="AspectRatioElement" style="top: 70%; left: 50%; align-content: auto; align-self: auto; justify-content: flex-start; align-items: auto; translate: -50% -50%;">
+        <ui:Button focusable="false" name="StartButton" class="play-button" style="background-image: resource(&apos;Images/PlayButton&apos;); -unity-background-scale-mode: scale-and-crop; background-position-y: center; background-position-x: center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-top-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; border-bottom-left-radius: 100%; background-color: rgba(224, 183, 25, 0); width: 100%; height: 100%; top: 0%; left: 0%; translate: 0% 0%;" />
+    </Nullzone.Unity.UIElements.AspectRatioElement>
 </ui:UXML>
