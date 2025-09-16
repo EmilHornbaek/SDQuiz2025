@@ -28,10 +28,6 @@ VisualElement {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    transition-property: transform, opacity;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-in-out;
-    transform: ;
     opacity: 1;
 }
 

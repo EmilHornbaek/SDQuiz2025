@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Content/UI/Styles/AnimalSelection.uss?fileID=7433441132597879392&amp;guid=f5683fdde5bc402449217908a571e3d3&amp;type=3#AnimalSelection" />
+    <Style src="project://database/Assets/Content/UI/Styles/AnimalSelection.uss" />
     <Nullzone.Unity.UIElements.AspectRatioElement width="40" name="AspectRatioElement" class="animal-option">
         <ui:Button enable-rich-text="true" name="AnimalButton" text="Button" class="fit-parent" style="background-image: resource(&apos;Images/AnimalIcons/hest&apos;); -unity-background-scale-mode: scale-to-fit; background-size: 100% 100%; background-color: rgb(9, 93, 0);" />
     </Nullzone.Unity.UIElements.AspectRatioElement>

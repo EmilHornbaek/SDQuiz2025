@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b126f12b8cf5574c95e00bf32f4d62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LinearMovement
-  duration: 1
+  duration: 10
   lerpMethod: 1
   worldSpaceType: 0
 --- !u!1660057539 &9223372036854775807
