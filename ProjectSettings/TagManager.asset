@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Button
+  - Animal
+  - QuizUI
   layers:
   - Default
   - TransparentFX
