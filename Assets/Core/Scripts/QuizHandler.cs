@@ -38,7 +38,7 @@ public class QuizHandler : MonoBehaviour
 
     private void OnAnswerSelected(int index)
     {
-        if (currentQuestion.Answers[index].)
+        if (currentQuestion.Answers[index].Allowed)
         {
             score++;
         }

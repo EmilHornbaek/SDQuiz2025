@@ -7,6 +7,9 @@ TagManager:
   - Button
   - Animal
   - QuizUI
+  - AnimalSelectionUI
+  - StartScreenUI
+  - UI
   layers:
   - Default
   - TransparentFX

@@ -28,3 +28,8 @@ VisualElement {
     border-bottom-color: rgb(211, 218, 41);
     background-color: rgb(224, 183, 25);
 }
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}

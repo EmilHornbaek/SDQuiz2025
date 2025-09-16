@@ -7,15 +7,18 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
+    private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         AnimalData[] animals = AssetUtility.GetAllAssetsOfType<AnimalData>().ToArray();
         UIDocument ui = GetComponent<UIDocument>();
         var root = ui.rootVisualElement;
-        VisualElement mainElement = root.Q<VisualElement>("animal-container");
+        mainElement = root.Q<VisualElement>("animal-container");
         VisualElement template = mainElement.Q<TemplateContainer>(name:"Template");
         template?.RemoveFromHierarchy();
+
+        mainElement?.AddToClassList("disabled");
         
         foreach ( AnimalData animal in animals)
         {
@@ -40,9 +43,9 @@ public class AnimalSelection : MonoBehaviour
         
     }
 
-    private Action GoToQuiz(AnimalData animalData)
+    private void GoToQuiz(AnimalData animalData)
     {
         // go to selected quiz
-        return null;
+        
     }
 }

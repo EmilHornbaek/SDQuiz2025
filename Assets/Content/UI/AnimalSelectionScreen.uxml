@@ -1,8 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="AnimalOptionButton_Template" src="project://database/Assets/Content/UI/Templates/AnimalOptionButton_Template.uxml?fileID=9197481963319205126&amp;guid=b45b57dcaf8975f45822dbba17e9dc65&amp;type=3#AnimalOptionButton_Template" />
     <Style src="project://database/Assets/Content/UI/Styles/AnimalSelection.uss?fileID=7433441132597879392&amp;guid=f5683fdde5bc402449217908a571e3d3&amp;type=3#AnimalSelection" />
-    <ui:VisualElement name="animal-container" style="flex-grow: 1; height: 100%; width: 90%;">
-        <ui:Instance template="AnimalOptionButton_Template" name="Template" style="align-content: center; align-self: center; justify-content: center; align-items: center; width: 100%; height: 100%;">
+    <Style src="project://database/Assets/Content/UI/Styles/BaseStyle.uss?fileID=7433441132597879392&amp;guid=e4c141d730b04a74d9f5e9723e9c31c0&amp;type=3#BaseStyle" />
+    <ui:VisualElement name="animal-container" style="width: 90%; height: 100%; bottom: auto; top: 0%; right: auto;">
+        <ui:Instance template="AnimalOptionButton_Template" name="Template" style="align-content: center; align-self: center; justify-content: center; align-items: center; width: 100%; height: 100%; top: auto; transition-property: top; transition-duration: 0.5s; transition-timing-function: ease-in-out;">
             <AttributeOverrides element-name="AspectRatioElement" width="40" y="1" />
         </ui:Instance>
     </ui:VisualElement>
