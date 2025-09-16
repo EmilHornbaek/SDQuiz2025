@@ -27,7 +27,7 @@ public class QuizHandler : MonoBehaviour
     void Start()
     {
         currentQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-        uiDocument = GetComponent<UIDocument>();
+        if (uiDocument == null) { uiDocument = GetComponent<UIDocument>(); }
         uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
         uiDocument.rootVisualElement.Query<Button>("Answer").ToList().CopyTo(answerButtons);
         uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
