@@ -46,6 +46,18 @@
     -unity-text-align: middle-center;
     color: rgb(200, 151, 8);
     -unity-font-style: normal;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left-color: rgb(204, 153, 3);
+    border-right-color: rgb(204, 153, 3);
+    border-top-color: rgb(204, 153, 3);
+    border-bottom-color: rgb(204, 153, 3);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
 }
 
 #Timer {
@@ -60,9 +72,32 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
-    -unity-background-image-tint-color: rgb(73, 103, 52);
     background-color: rgb(73, 103, 52);
     color: rgb(0, 0, 0);
+}
+
+.unity-progress-bar__background {
+    background-color: rgb(73, 103, 52);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-left-color: rgb(204, 153, 3);
+    border-right-color: rgb(204, 153, 3);
+    border-top-color: rgb(204, 153, 3);
+    border-bottom-color: rgb(204, 153, 3);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.unity-progress-bar__progress {
+    background-color: rgb(200, 151, 8);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #QuestAmount {
@@ -75,4 +110,12 @@
     color: rgb(204, 153, 3);
     -unity-font-style: bold;
     top: -3px;
+    border-left-color: rgb(204, 153, 3);
+    border-right-color: rgb(204, 153, 3);
+    border-top-color: rgb(204, 153, 3);
+    border-bottom-color: rgb(204, 153, 3);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
 }
