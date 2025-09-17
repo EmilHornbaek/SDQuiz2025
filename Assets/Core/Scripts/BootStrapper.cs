@@ -16,4 +16,9 @@ public class BootStrapper : MonoBehaviour
         yield return SceneManager.LoadSceneAsync(uiScene.name, LoadSceneMode.Additive);
         yield return SceneManager.UnloadSceneAsync(gameObject.scene);
     }
+
+    private void Awake()
+    {
+        Screen.fullScreen = true;
+    }
 }

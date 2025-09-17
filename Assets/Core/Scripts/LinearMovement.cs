@@ -23,7 +23,7 @@ public class LinearMovement : MonoBehaviour
     private const int WEIRD_MAGIC_DURATION_MULTIPLIER = 5;
     [SerializeField, FieldName("Duration (seconds)")] private float duration;
     [SerializeField] private MovementType lerpMethod = MovementType.Linear;
-    [SerializeField] private WorldSpaceType worldSpaceType;
+    [SerializeField] private WorldSpaceType worldSpaceType = WorldSpaceType.ThirdDimension;
     
     private bool active = false;
     private float timer = 0f;
