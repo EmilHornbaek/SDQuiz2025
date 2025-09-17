@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 407713698}
   - component: {fileID: 407713697}
   m_Layer: 0
-  m_Name: Square
+  m_Name: BackgroundSky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 1055897966}
   - component: {fileID: 1055897965}
   m_Layer: 0
-  m_Name: TitelText
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
