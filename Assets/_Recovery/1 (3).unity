@@ -190,10 +190,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3919174538736658665, guid: e124138a10b891144b655798e3810bbb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e124138a10b891144b655798e3810bbb, type: 3}
 --- !u!4 &1418559230 stripped
 Transform:
@@ -271,9 +268,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4372246927864827669, guid: 3bbadbad2440ba547bee4bfdf204deb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1981635760}
-    - targetCorrespondingSourceObject: {fileID: 4372246927864827669, guid: 3bbadbad2440ba547bee4bfdf204deb0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3bbadbad2440ba547bee4bfdf204deb0, type: 3}
 --- !u!1 &1981635757 stripped
 GameObject:
@@ -312,7 +306,7 @@ PrefabInstance:
     - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: animalData
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: e83056043d568f94395e9de3082ac07e, type: 2}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: sourceAsset
       value: 
@@ -368,10 +362,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6364208696293770204, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
 --- !u!4 &1987827757 stripped
 Transform:

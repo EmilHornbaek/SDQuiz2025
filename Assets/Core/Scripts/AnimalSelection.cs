@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
+    [SerializeField] private Transform animalButtonDestination;
+
     private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +47,11 @@ public class AnimalSelection : MonoBehaviour
 
     private void GoToQuiz(AnimalData animalData)
     {
-        // go to selected quiz
-        
+        LinearMovement lm = Camera.main.GetComponent<LinearMovement>();
+        if (lm is null) return;
+        lm.GoTo(animalButtonDestination);
+        QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
+        quizHandler.SetAnimalData(animalData);
+        quizHandler.ResetQuiz();
     }
 }
