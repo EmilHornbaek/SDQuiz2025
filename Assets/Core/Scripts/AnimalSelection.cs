@@ -50,5 +50,8 @@ public class AnimalSelection : MonoBehaviour
         LinearMovement lm = Camera.main.GetComponent<LinearMovement>();
         if (lm is null) return;
         lm.GoTo(animalButtonDestination);
+        QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
+        quizHandler.SetAnimalData(animalData);
+        quizHandler.ResetQuiz();
     }
 }

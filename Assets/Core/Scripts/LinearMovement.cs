@@ -50,13 +50,30 @@ public class LinearMovement : MonoBehaviour
 
             if (timer >= duration)
             {
-                currentDestination = activeDestination;
+                HandleDestinationEnd();
                 activeDestination = default;
                 timer = 0;
                 active = false;
             }
 
 
+        }
+    }
+
+    private void HandleDestinationEnd()
+    {
+        switch (worldSpaceType)
+        {
+            case WorldSpaceType.SecondDimension:
+                Vector3 activeVector = new Vector3(activeDestination.position.x, activeDestination.position.y, currentDestination.position.z);
+                currentDestination = activeDestination;
+                currentDestination.position = activeVector;
+                break;
+            case WorldSpaceType.ThirdDimension:
+                currentDestination = activeDestination;
+                break;
+            default:
+                break;
         }
     }
 

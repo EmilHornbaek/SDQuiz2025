@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: animalData
       value: 
-      objectReference: {fileID: 11400000, guid: e83056043d568f94395e9de3082ac07e, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: sourceAsset
       value: 
