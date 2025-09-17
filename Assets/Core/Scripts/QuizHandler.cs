@@ -18,7 +18,7 @@ public class QuizHandler : MonoBehaviour
     [Tooltip("Number of questions in the quiz")]
     private int numberOfQuestions = 10;
     private int currentQuestionIndex = 0;
-    private Button[] answerButtons;
+    private Button[] answerButtons = new Button[4];
     private int maxAnswers = 2;
     private int score = 0;
     private StyleColor originalButtonColor;
@@ -30,16 +30,15 @@ public class QuizHandler : MonoBehaviour
     [SerializeField]
     private AudioClip victorySound;
     private AudioSource audioSource;
-    private bool isQuizDone = false;
+    private bool isQuizDone = true;
+    private bool firstStart = true;
+    VisualElement container;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (audioSource == null) { audioSource = GetComponent<AudioSource>(); }
         currentQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-        if (uiDocument == null) { uiDocument = GetComponent<UIDocument>(); }
-        uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
-        if (answerButtons == null || answerButtons.Length == 0) { uiDocument.rootVisualElement.Query<Button>("Answer").ToList().CopyTo(answerButtons); }
-        uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
+        container.Q<Label>("Question").text = currentQuestion.Question;
+        container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
         for (int i = 0; i < answerButtons.Length; i++)
         {
             if (i < currentQuestion.Answers.Length)
@@ -54,7 +53,13 @@ public class QuizHandler : MonoBehaviour
             }
         }
         usedQuestions.Add(currentQuestion);
-        originalButtonColor = answerButtons[0].style.backgroundColor;
+        if (originalButtonColor == null || originalButtonColor == default) originalButtonColor = answerButtons[0].style.backgroundColor;
+        if (container.Q<ProgressBar>("Timer").highValue != setTimer)
+        {
+            container.Q<ProgressBar>("Timer").highValue = setTimer;
+        }
+        container.Q<ProgressBar>("Timer").value = timer;
+        container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
     }
 
     private void OnAnswerSelected(int index)
@@ -109,8 +114,8 @@ public class QuizHandler : MonoBehaviour
             } while (usedQuestions.Contains(nextQuestion));
             currentQuestion = nextQuestion;
             usedQuestions.Add(currentQuestion);
-            uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
-            uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
+            container.Q<Label>("Question").text = currentQuestion.Question;
+            container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
             for (int i = 0; i < answerButtons.Length; i++)
             {
                 if (i < currentQuestion.Answers.Length)
@@ -127,6 +132,8 @@ public class QuizHandler : MonoBehaviour
                 }
             }
             timer = setTimer;
+            container.Q<ProgressBar>("Timer").value = timer;
+            container.Q<Label>("Timer").text = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
         }
 
     }
@@ -138,19 +145,23 @@ public class QuizHandler : MonoBehaviour
     /// this method to restart the quiz from the beginning.</remarks>
     public void ResetQuiz()
     {
+        if (audioSource == null) { audioSource = gameObject.GetComponent<AudioSource>(); }
+        if (uiDocument == null) uiDocument = gameObject.GetComponent<UIDocument>();
+        var uiRoot = uiDocument.rootVisualElement;
+        container = uiRoot.Q<VisualElement>("root");
+        if (answerButtons == null || answerButtons.Length == 0) { container.Query<Button>("Answer").ToList().CopyTo(answerButtons); }
         isQuizDone = false;
         score = 0;
         currentQuestionIndex = 0;
         usedQuestions.Clear();
         maxAnswers = 2;
         timer = setTimer;
-        for (int i = 0; i < answerButtons.Length; i++)
-        {
-            int tempIndex = i; // Capture the index for the lambda
-            answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
-            answerButtons[i].style.backgroundColor = originalButtonColor;
-        }
+        container.Q<ProgressBar>("Timer").value = timer;
+        container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+        if (!firstStart) { ResetAnswers(); }
+        else { firstStart = false; }
         Start();
+
     }
 
     // Update is called once per frame
@@ -162,8 +173,8 @@ public class QuizHandler : MonoBehaviour
             if (timer > 0)
             {
                 timer -= 1 * Time.deltaTime;
-                uiDocument.rootVisualElement.Q<ProgressBar>("Timer").value = timer;
-                uiDocument.rootVisualElement.Q<Label>("Timer").text = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+                container.Q<ProgressBar>("Timer").value = timer;
+                container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
             }
             else
             {
@@ -180,5 +191,15 @@ public class QuizHandler : MonoBehaviour
     public void SetAnimalData(AnimalData data)
     {
         animalData = data;
+    }
+
+    private void ResetAnswers()
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            int tempIndex = i; // Capture the index for the lambda
+            answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
+            answerButtons[i].style.backgroundColor = originalButtonColor;
+        }
     }
 }
