@@ -23,13 +23,22 @@ public class QuizHandler : MonoBehaviour
     private int score = 0;
     private StyleColor originalButtonColor;
     private UIDocument uiDocument;
+    [SerializeField]
+    private AudioClip correctAnswerSound;
+    [SerializeField]
+    private AudioClip wrongAnswerSound;
+    [SerializeField]
+    private AudioClip victorySound;
+    private AudioSource audioSource;
+    private bool isQuizDone = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (audioSource == null) { audioSource = GetComponent<AudioSource>(); }
         currentQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
         if (uiDocument == null) { uiDocument = GetComponent<UIDocument>(); }
         uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
-        uiDocument.rootVisualElement.Query<Button>("Answer").ToList().CopyTo(answerButtons);
+        if (answerButtons == null || answerButtons.Length == 0) { uiDocument.rootVisualElement.Query<Button>("Answer").ToList().CopyTo(answerButtons); }
         uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
         for (int i = 0; i < answerButtons.Length; i++)
         {
@@ -53,6 +62,7 @@ public class QuizHandler : MonoBehaviour
         if (currentQuestion.Answers[index].Allowed)
         {
             score++;
+            audioSource.PlayOneShot(correctAnswerSound);
             for (int i = 0; i < answerButtons.Length; i++)
             {
                 int tempIndex = i; // Capture the index for the lambda
@@ -65,14 +75,15 @@ public class QuizHandler : MonoBehaviour
             maxAnswers--;
             answerButtons[index].clicked -= () => OnAnswerSelected(index); // Disable further clicks
             answerButtons[index].style.backgroundColor = Color.red; // Indicate wrong answer
-            if (maxAnswers <= 0) 
+            audioSource.PlayOneShot(wrongAnswerSound);
+            if (maxAnswers <= 0)
             {
                 for (int i = 0; i < answerButtons.Length; i++)
                 {
                     int tempIndex = i; // Capture the index for the lambda
                     answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
                 }
-                NextQuestion(); 
+                NextQuestion();
             }
         }
     }
@@ -82,37 +93,52 @@ public class QuizHandler : MonoBehaviour
         currentQuestionIndex++;
         if (currentQuestionIndex >= numberOfQuestions)
         {
-            // Quiz Finished - Show Score and send back to main menu
+            audioSource.PlayOneShot(victorySound);
+            EndGame();
         }
-        QuizQuestion nextQuestion;
-        do
+        if (animalData.QuizQuestions.Length >= usedQuestions.Count)
         {
-            nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-        } while (usedQuestions.Contains(nextQuestion));
-        currentQuestion = nextQuestion;
-        usedQuestions.Add(currentQuestion);
-        uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
-        uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
-        for (int i = 0; i < answerButtons.Length; i++)
-        {
-            if (i < currentQuestion.Answers.Length)
-            {
-                answerButtons[i].text = currentQuestion.Answers[i].Answer;
-                int index = i; // Capture the index for the lambda
-                answerButtons[i].clicked += () => OnAnswerSelected(index);
-                answerButtons[i].style.display = DisplayStyle.Flex;
-                answerButtons[i].style.backgroundColor = originalButtonColor;
-            }
-            else
-            {
-                answerButtons[i].style.display = DisplayStyle.None;
-            }
+            EndGame();
         }
-        timer = setTimer;
-    }
+        else
+        {
+            QuizQuestion nextQuestion;
+            do
+            {
+                nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
+            } while (usedQuestions.Contains(nextQuestion));
+            currentQuestion = nextQuestion;
+            usedQuestions.Add(currentQuestion);
+            uiDocument.rootVisualElement.Q<Label>("Question").text = currentQuestion.Question;
+            uiDocument.rootVisualElement.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
+            for (int i = 0; i < answerButtons.Length; i++)
+            {
+                if (i < currentQuestion.Answers.Length)
+                {
+                    answerButtons[i].text = currentQuestion.Answers[i].Answer;
+                    int index = i; // Capture the index for the lambda
+                    answerButtons[i].clicked += () => OnAnswerSelected(index);
+                    answerButtons[i].style.display = DisplayStyle.Flex;
+                    answerButtons[i].style.backgroundColor = originalButtonColor;
+                }
+                else
+                {
+                    answerButtons[i].style.display = DisplayStyle.None;
+                }
+            }
+            timer = setTimer;
+        }
 
-    private void ResetQuiz()
+    }
+    /// <summary>
+    /// Resets the quiz to its initial state, clearing progress and preparing for a new session.
+    /// </summary>
+    /// <remarks>This method resets the score, question index, and any used questions. It also restores the 
+    /// default state of answer buttons, including their event handlers and styles, and restarts the quiz timer. Call
+    /// this method to restart the quiz from the beginning.</remarks>
+    public void ResetQuiz()
     {
+        isQuizDone = false;
         score = 0;
         currentQuestionIndex = 0;
         usedQuestions.Clear();
@@ -130,16 +156,29 @@ public class QuizHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (timer > 0)
-            {
-            timer -= 1 * Time.deltaTime;
-            uiDocument.rootVisualElement.Q<ProgressBar>("Timer").value = timer;
-            uiDocument.rootVisualElement.Q<Label>("Timer").text = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
-        }
+        if (isQuizDone) return;
         else
         {
-            NextQuestion();
+            if (timer > 0)
+            {
+                timer -= 1 * Time.deltaTime;
+                uiDocument.rootVisualElement.Q<ProgressBar>("Timer").value = timer;
+                uiDocument.rootVisualElement.Q<Label>("Timer").text = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+            }
+            else
+            {
+                audioSource.PlayOneShot(wrongAnswerSound);
+                NextQuestion();
+            }
         }
+    }
+    private void EndGame()
+    {
+        isQuizDone = true;
+        // Show final score and pick between return to menu or restart
+    }
+    public void SetAnimalData(AnimalData data)
+    {
+        animalData = data;
     }
 }
