@@ -69,9 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a09d239e7c738469eea21496fc8b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  setTimer: 60
   animalData: {fileID: 0}
   numberOfQuestions: 10
+  setTimer: 60
   correctAnswerSound: {fileID: 0}
   wrongAnswerSound: {fileID: 0}
   victorySound: {fileID: 0}

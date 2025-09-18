@@ -1,96 +1,224 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 
-
 public class QuizHandler : MonoBehaviour
 {
-    [SerializeField]
-    [Range(1, 120)]
-    [Tooltip("Time in seconds for each question")]
+    [Header("Data")]
+    [SerializeField] private AnimalData animalData;
+
+    [Header("Gameplay")]
+    [SerializeField, Range(1, 20), Tooltip("Number of questions in the quiz")]
+    private int numberOfQuestions = 10;
+    [SerializeField, Range(1, 120), Tooltip("Time in seconds for each question")]
     private int setTimer = 60;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip correctAnswerSound;
+    [SerializeField] private AudioClip wrongAnswerSound;
+    [SerializeField] private AudioClip victorySound;
+
     private float timer;
     private List<QuizQuestion> usedQuestions = new List<QuizQuestion>();
     private QuizQuestion currentQuestion;
-    [SerializeField]
-    private AnimalData animalData;
-    [Range(1, 20)]
-    [SerializeField]
-    [Tooltip("Number of questions in the quiz")]
-    private int numberOfQuestions = 10;
     private int currentQuestionIndex = 0;
     private List<Button> answerButtons = new List<Button>();
     private int maxAnswers = 2;
     private int score = 0;
     private StyleColor originalButtonColor;
     private UIDocument uiDocument;
-    [SerializeField]
-    private AudioClip correctAnswerSound;
-    [SerializeField]
-    private AudioClip wrongAnswerSound;
-    [SerializeField]
-    private AudioClip victorySound;
     private AudioSource audioSource;
-    private bool isQuizDone = true;
+    private bool isQuizDone = false;   // starter som DONE → Update return’er
     private bool firstStart = true;
-    VisualElement container;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private VisualElement container;
+
+    void Awake()
+    {
+        // Hent komponenter TIDLIGT
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
+
+        if (uiDocument != null)
+        {
+            var uiRoot = uiDocument.rootVisualElement;
+            container = uiRoot.Q<VisualElement>("root");
+            if (container != null)
+            {
+                // Saml answer knapper en gang
+                if (answerButtons == null || answerButtons.Count == 0)
+                    answerButtons = container.Query<Button>("Answer").ToList();
+            }
+        }
+    }
+
     void Start()
     {
-        currentQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
+
+        // Start rigtigt i stedet for at antage at felter er sat
+
+    }
+
+    public void Update()
+    {
+        if (isQuizDone || firstStart) return;
+
+        if (timer > 0f)
+        {
+            timer -= Time.deltaTime;
+            var pb = container.Q<ProgressBar>("Timer");
+            if (pb != null)
+            {
+                pb.value = timer;
+                pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+            }
+        }
+        else
+        {
+            if (audioSource && wrongAnswerSound) audioSource.PlayOneShot(wrongAnswerSound);
+            NextQuestion();
+        }
+    }
+
+    public void ResetQuiz()
+    {
+        if (container == null)
+        {
+            Debug.LogError("Container (root VisualElement) not found. Ensure UIDocument has a 'root' element.");
+            return;
+        }
+
+        if (answerButtons == null || answerButtons.Count == 0)
+            answerButtons = container.Query<Button>("Answer").ToList();
+
+        isQuizDone = false;
+        score = 0;
+        currentQuestionIndex = 0;
+        usedQuestions.Clear();
+        maxAnswers = 2;
+
+        var pb = container.Q<ProgressBar>("Timer");
+        if (pb != null)
+        {
+            if (Mathf.Approximately(pb.highValue, 0) || pb.highValue != setTimer)
+                pb.highValue = setTimer;
+        }
+
+        timer = setTimer;
+        if (pb != null)
+        {
+            pb.value = timer;
+            pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+        }
+
+        if (!firstStart) ResetAnswers(); else firstStart = false;
+
+        // Første spørgsmål
+        SetupRandomQuestion();
+    }
+
+    private void SetupRandomQuestion()
+    {
+        if (animalData == null || animalData.QuizQuestions == null || animalData.QuizQuestions.Length == 0)
+        {
+            Debug.LogError("No quiz questions in AnimalData.");
+            EndGame();
+            return;
+        }
+
+        // Slut hvis vi har brugt alle eller nået antal
+        if (currentQuestionIndex >= numberOfQuestions || usedQuestions.Count >= animalData.QuizQuestions.Length)
+        {
+            EndGame();
+            return;
+        }
+
+        QuizQuestion nextQuestion;
+        int safety = 200;
+        do
+        {
+            nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
+        } while (usedQuestions.Contains(nextQuestion) && --safety > 0);
+
+        currentQuestion = nextQuestion;
+        usedQuestions.Add(currentQuestion);
+
+        // UI
         container.Q<Label>("Question").text = currentQuestion.Question;
-        container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
+        container.Q<Label>("Score").text = $"Score: {score}/{currentQuestionIndex}";
+
+        // Husk original farve én gang
+        if (answerButtons.Count > 0 && (originalButtonColor == default))
+            originalButtonColor = answerButtons[0].style.backgroundColor;
+
+        // Bind svar
         for (int i = 0; i < answerButtons.Count; i++)
         {
+            var btn = answerButtons[i];
             if (i < currentQuestion.Answers.Length)
             {
-                answerButtons[i].text = currentQuestion.Answers[i].Answer;
-                int index = i; // Capture the index for the lambda
-                answerButtons[i].clicked += () => OnAnswerSelected(index);
+                btn.text = currentQuestion.Answers[i].Answer;
+                int idx = i;
+                // Først fjern alle tidligere handlers (se note nedenfor)
+                btn.clicked -= _buttonHandlers[idx];
+                _buttonHandlers[idx] = () => OnAnswerSelected(idx);
+                btn.clicked += _buttonHandlers[idx];
+
+                btn.style.display = DisplayStyle.Flex;
+                btn.style.backgroundColor = originalButtonColor;
             }
             else
             {
-                answerButtons[i].style.display = DisplayStyle.None;
+                btn.style.display = DisplayStyle.None;
             }
         }
-        usedQuestions.Add(currentQuestion);
-        if (originalButtonColor == null || originalButtonColor == default) originalButtonColor = answerButtons[0].style.backgroundColor;
-        if (container.Q<ProgressBar>("Timer").highValue != setTimer)
+
+        timer = setTimer;
+        var pb = container.Q<ProgressBar>("Timer");
+        if (pb != null)
         {
-            container.Q<ProgressBar>("Timer").highValue = setTimer;
+            pb.value = timer;
+            pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
         }
-        container.Q<ProgressBar>("Timer").value = timer;
-        container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
     }
+
+    // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
+    private readonly System.Action[] _buttonHandlers = new System.Action[8]; // antag max 8 svar-knapper; udvid hvis nødvendigt
 
     private void OnAnswerSelected(int index)
     {
         if (currentQuestion.Answers[index].Allowed)
         {
             score++;
-            audioSource.PlayOneShot(correctAnswerSound);
-            for (int i = 0; i < answerButtons.Count; i++)
-            {
-                int tempIndex = i; // Capture the index for the lambda
-                answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
-            }
+            if (audioSource && correctAnswerSound) audioSource.PlayOneShot(correctAnswerSound);
+            UnsubscribeAllButtons();
             NextQuestion();
         }
         else
         {
             maxAnswers--;
-            answerButtons[index].clicked -= () => OnAnswerSelected(index); // Disable further clicks
-            answerButtons[index].style.backgroundColor = Color.red; // Indicate wrong answer
-            audioSource.PlayOneShot(wrongAnswerSound);
+            // Fjern kun denne knap midlertidigt
+            var btn = answerButtons[index];
+            if (_buttonHandlers[index] != null)
+                btn.clicked -= _buttonHandlers[index];
+
+            btn.style.backgroundColor = Color.red;
+            if (audioSource && wrongAnswerSound) audioSource.PlayOneShot(wrongAnswerSound);
+
             if (maxAnswers <= 0)
             {
-                for (int i = 0; i < answerButtons.Count; i++)
-                {
-                    int tempIndex = i; // Capture the index for the lambda
-                    answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
-                }
+                UnsubscribeAllButtons();
                 NextQuestion();
             }
+        }
+    }
+
+    private void UnsubscribeAllButtons()
+    {
+        for (int i = 0; i < answerButtons.Count && i < _buttonHandlers.Length; i++)
+        {
+            if (_buttonHandlers[i] != null)
+                answerButtons[i].clicked -= _buttonHandlers[i];
         }
     }
 
@@ -99,107 +227,35 @@ public class QuizHandler : MonoBehaviour
         currentQuestionIndex++;
         if (currentQuestionIndex >= numberOfQuestions)
         {
-            audioSource.PlayOneShot(victorySound);
+            if (audioSource && victorySound) audioSource.PlayOneShot(victorySound);
             EndGame();
+            return;
         }
-        if (animalData.QuizQuestions.Length >= usedQuestions.Count)
+
+        if (usedQuestions.Count >= animalData.QuizQuestions.Length)
         {
             EndGame();
-        }
-        else
-        {
-            QuizQuestion nextQuestion;
-            do
-            {
-                nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-            } while (usedQuestions.Contains(nextQuestion));
-            currentQuestion = nextQuestion;
-            usedQuestions.Add(currentQuestion);
-            container.Q<Label>("Question").text = currentQuestion.Question;
-            container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
-            for (int i = 0; i < answerButtons.Count; i++)
-            {
-                if (i < currentQuestion.Answers.Length)
-                {
-                    answerButtons[i].text = currentQuestion.Answers[i].Answer;
-                    int index = i; // Capture the index for the lambda
-                    answerButtons[i].clicked += () => OnAnswerSelected(index);
-                    answerButtons[i].style.display = DisplayStyle.Flex;
-                    answerButtons[i].style.backgroundColor = originalButtonColor;
-                }
-                else
-                {
-                    answerButtons[i].style.display = DisplayStyle.None;
-                }
-            }
-            timer = setTimer;
-            container.Q<ProgressBar>("Timer").value = timer;
-            container.Q<Label>("Timer").text = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+            return;
         }
 
-    }
-    /// <summary>
-    /// Resets the quiz to its initial state, clearing progress and preparing for a new session.
-    /// </summary>
-    /// <remarks>This method resets the score, question index, and any used questions. It also restores the 
-    /// default state of answer buttons, including their event handlers and styles, and restarts the quiz timer. Call
-    /// this method to restart the quiz from the beginning.</remarks>
-    public void ResetQuiz()
-    {
-        if (audioSource == null) { audioSource = gameObject.GetComponent<AudioSource>(); }
-        if (uiDocument == null) uiDocument = gameObject.GetComponent<UIDocument>();
-        var uiRoot = uiDocument.rootVisualElement;
-        container = uiRoot.Q<VisualElement>("root");
-        if (answerButtons == null || answerButtons.Count == 0) {answerButtons = container.Query<Button>("Answer").ToList(); }
-        isQuizDone = false;
-        score = 0;
-        currentQuestionIndex = 0;
-        usedQuestions.Clear();
-        maxAnswers = 2;
-        timer = setTimer;
-        container.Q<ProgressBar>("Timer").value = timer;
-        container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
-        if (!firstStart) { ResetAnswers(); }
-        else { firstStart = false; }
-        Start();
-
+        SetupRandomQuestion();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isQuizDone) return;
-        else
-        {
-            if (timer > 0)
-            {
-                timer -= 0.5f;
-                container.Q<ProgressBar>("Timer").value = timer;
-                container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
-            }
-            else
-            {
-                audioSource.PlayOneShot(wrongAnswerSound);
-                NextQuestion();
-            }
-        }
-    }
     private void EndGame()
     {
         isQuizDone = true;
-        // Show final score and pick between return to menu or restart
+        // TODO: Vis endeskærm
     }
-    public void SetAnimalData(AnimalData data)
-    {
-        animalData = data;
-    }
+
+    public void SetAnimalData(AnimalData data) => animalData = data;
 
     private void ResetAnswers()
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {
-            int tempIndex = i; // Capture the index for the lambda
-            answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
+            if (_buttonHandlers[i] != null)
+                answerButtons[i].clicked -= _buttonHandlers[i];
+
             answerButtons[i].style.backgroundColor = originalButtonColor;
         }
     }
