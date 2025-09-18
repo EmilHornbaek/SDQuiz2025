@@ -292,7 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a477f44a8ac7f9648b5f4f7df035e4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen
-  StartButtonDestination: {fileID: 1418559230}
+  lerpSwitch: 0
+  newCameraTarget: {fileID: 1418559230}
 --- !u!1001 &1987827756
 PrefabInstance:
   m_ObjectHideFlags: 0

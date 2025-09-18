@@ -1,3 +1,4 @@
+using Nullzone.Unity.Attributes;
 using Nullzone.Unity.UIElements;
 using System;
 using System.Linq;
@@ -7,7 +8,8 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
-    [SerializeField] private Transform animalButtonDestination;
+    [SerializeField, FieldName("Send Camera To:")] private Transform animalButtonDestination;
+    [SerializeField] private LerpState lerpSwitch = LerpState.QuizSelect;
 
     private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,11 +49,11 @@ public class AnimalSelection : MonoBehaviour
 
     private void GoToQuiz(AnimalData animalData)
     {
-        LinearMovement lm = Camera.main.GetComponent<LinearMovement>();
-        if (lm is null) return;
-        lm.GoTo(animalButtonDestination);
+        LerpHandler lh = LerpHandler.Instance;
+        lh.MoveObjects(lerpSwitch, false, animalButtonDestination);
         QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
         quizHandler.SetAnimalData(animalData);
         quizHandler.ResetQuiz();
     }
+
 }

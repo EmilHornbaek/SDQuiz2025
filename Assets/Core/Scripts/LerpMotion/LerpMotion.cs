@@ -56,9 +56,7 @@ public class LerpMotion : MonoBehaviour
     /// </summary>
     private void MoveUpdate()
     {
-        Vector3 targetPos;
-        if (lockZPosition) { targetPos = new Vector3(targetTransform.position.x, targetTransform.position.y, originalTransform.position.z); }
-        else { targetPos = targetTransform.position; }
+        Vector3 targetPos = TargetPos();
 
         if (!inverse)
         {
@@ -77,6 +75,12 @@ public class LerpMotion : MonoBehaviour
             elapsedTime = 0;
             active = false;
             inverse = false;
+            if (gameObject.TryGetComponent<Camera>(out Camera camera))
+            {
+                TransformSnapshot newOrigin = targetTransform.Snapshot();
+                newOrigin.position = targetPos;
+                originalTransform = newOrigin;
+            }
         }
     }
 
@@ -88,6 +92,14 @@ public class LerpMotion : MonoBehaviour
     {
         originalTransform = transform.Snapshot();
         targetTransform = transform;
+    }
+
+    private Vector3 TargetPos()
+    {
+        Vector3 targetPos;
+        if (lockZPosition) { targetPos = new Vector3(targetTransform.position.x, targetTransform.position.y, originalTransform.position.z); }
+        else { targetPos = targetTransform.position; }
+        return targetPos;
     }
 
     private float Cubic(float t)

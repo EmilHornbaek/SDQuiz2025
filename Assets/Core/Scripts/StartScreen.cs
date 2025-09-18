@@ -15,18 +15,8 @@ public class StartScreen : MonoBehaviour
         Button startButton = root.Q<Button>("StartButton");
         startButton.clicked += () =>
         {
-            LerpHandler lh = FindLerpHandler();
+            LerpHandler lh = LerpHandler.Instance;
             lh.MoveObjects(lerpSwitch, false, newCameraTarget);
         };
-    }
-
-    private LerpHandler FindLerpHandler()
-    {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("LerpHandler"))
-        {
-            LerpHandler handler = go.GetComponent<LerpHandler>();
-            if (handler != null) { return handler; }
-        }
-        return null;
     }
 }

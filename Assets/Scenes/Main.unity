@@ -775,12 +775,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1432284522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b126f12b8cf5574c95e00bf32f4d62e, type: 3}
+  m_Script: {fileID: 11500000, guid: 69cc0944b6c0b1f40bf7248db10e8e91, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LinearMovement
-  duration: 1
+  m_EditorClassIdentifier: Assembly-CSharp::LerpMotion
+  targetTransform: {fileID: 0}
+  lockZPosition: 1
+  duration: 1.2
   lerpMethod: 1
-  worldSpaceType: 0
+  lerpCondition: 0
 --- !u!1001 &975815860117072343
 PrefabInstance:
   m_ObjectHideFlags: 0
