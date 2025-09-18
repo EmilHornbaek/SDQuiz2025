@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &664664771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6364208696293770204, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+  m_PrefabInstance: {fileID: 1987827756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &737062725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,7 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a477f44a8ac7f9648b5f4f7df035e4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen
-  StartButtonDestination: {fileID: 1418559230}
+  lerpSwitch: 0
+  newCameraTarget: {fileID: 1418559230}
 --- !u!1001 &1987827756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,6 +319,10 @@ PrefabInstance:
       propertyPath: animalData
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: wrongAnswerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f3a8fa33151a3e44d842129a961adc01, type: 3}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: sourceAsset
       value: 
@@ -371,6 +381,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6364208696293770204, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1987827758}
+    - targetCorrespondingSourceObject: {fileID: 6364208696293770204, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
 --- !u!4 &1987827757 stripped
@@ -378,6 +391,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7899907837563869260, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
   m_PrefabInstance: {fileID: 1987827756}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987827758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664664771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b1803b7cdd0949b193f8fdb3701d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  quizBackDestination: {fileID: 1418559230}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

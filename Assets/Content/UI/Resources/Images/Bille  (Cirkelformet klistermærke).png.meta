@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d8f44c5dc85198b41907685992f66023
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3598054963547727593
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_0"
+  - first:
+      213: 6266979880081683257
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_1"
+  - first:
+      213: -214441935277005685
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_2"
+  - first:
+      213: -1296391962675859997
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_3"
+  - first:
+      213: -2338599469800276663
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_4"
+  - first:
+      213: -5810857628542426982
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_5"
+  - first:
+      213: 4544517144692178052
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_6"
+  - first:
+      213: 1652948545529437198
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_7"
+  - first:
+      213: -7892712743698651635
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_8"
+  - first:
+      213: 5210828576040235671
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_9"
+  - first:
+      213: -6381960344854927813
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_10"
+  - first:
+      213: -6516385366523320602
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_11"
+  - first:
+      213: -876481214412844606
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_12"
+  - first:
+      213: 3574422554220422768
+    second: "Bille  (Cirkelformet klisterm\xE6rke)_13"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_0"
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 807
+        width: 126
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e6e7901debdee130800000000000000
+      internalID: 3598054963547727593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_1"
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 952
+        width: 64
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933f9ce3ff8c8f650800000000000000
+      internalID: 6266979880081683257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_2"
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 910
+        width: 126
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b84edde2236260df0800000000000000
+      internalID: -214441935277005685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_3"
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 952
+        width: 63
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eda807e06a420ee0800000000000000
+      internalID: -1296391962675859997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_4"
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 807
+        width: 126
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94d33a23c20ab8fd0800000000000000
+      internalID: -2338599469800276663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_5"
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 746
+        width: 248
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a902c5a26cfab5fa0800000000000000
+      internalID: -5810857628542426982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_6"
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 471
+        width: 185
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48cbc05e34e511f30800000000000000
+      internalID: 4544517144692178052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_7"
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 227
+        width: 171
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0cd748c1f370f610800000000000000
+      internalID: 1652948545529437198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_8"
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 624
+        width: 98
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d06a4a5b393777290800000000000000
+      internalID: -7892712743698651635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_9"
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 227
+        width: 171
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79235545bf4905840800000000000000
+      internalID: 5210828576040235671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_10"
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 471
+        width: 185
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b36ea4221e8be67a0800000000000000
+      internalID: -6381960344854927813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_11"
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 119
+        width: 68
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e6e2d0d8062195a0800000000000000
+      internalID: -6516385366523320602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_12"
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 119
+        width: 68
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c19e92bafc16d3f0800000000000000
+      internalID: -876481214412844606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Bille  (Cirkelformet klisterm\xE6rke)_13"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 37
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 076e37dff56ea9130800000000000000
+      internalID: 3574422554220422768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Bille  (Cirkelformet klisterm\xE6rke)_0": 3598054963547727593
+      "Bille  (Cirkelformet klisterm\xE6rke)_1": 6266979880081683257
+      "Bille  (Cirkelformet klisterm\xE6rke)_10": -6381960344854927813
+      "Bille  (Cirkelformet klisterm\xE6rke)_11": -6516385366523320602
+      "Bille  (Cirkelformet klisterm\xE6rke)_12": -876481214412844606
+      "Bille  (Cirkelformet klisterm\xE6rke)_13": 3574422554220422768
+      "Bille  (Cirkelformet klisterm\xE6rke)_2": -214441935277005685
+      "Bille  (Cirkelformet klisterm\xE6rke)_3": -1296391962675859997
+      "Bille  (Cirkelformet klisterm\xE6rke)_4": -2338599469800276663
+      "Bille  (Cirkelformet klisterm\xE6rke)_5": -5810857628542426982
+      "Bille  (Cirkelformet klisterm\xE6rke)_6": 4544517144692178052
+      "Bille  (Cirkelformet klisterm\xE6rke)_7": 1652948545529437198
+      "Bille  (Cirkelformet klisterm\xE6rke)_8": -7892712743698651635
+      "Bille  (Cirkelformet klisterm\xE6rke)_9": 5210828576040235671
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

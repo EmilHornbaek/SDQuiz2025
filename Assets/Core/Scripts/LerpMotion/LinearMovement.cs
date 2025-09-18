@@ -4,12 +4,6 @@ using Nullzone.Unity.Attributes;
 using Unity.VisualScripting;
 
 [Serializable]
-public enum MovementType
-{
-    Linear,
-    Cubic
-}
-[Serializable]
 public enum WorldSpaceType
 {
     [InspectorName("2D")]

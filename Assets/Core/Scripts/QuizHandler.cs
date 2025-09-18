@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 
+
 public class QuizHandler : MonoBehaviour
 {
     [SerializeField]
@@ -18,7 +19,7 @@ public class QuizHandler : MonoBehaviour
     [Tooltip("Number of questions in the quiz")]
     private int numberOfQuestions = 10;
     private int currentQuestionIndex = 0;
-    private Button[] answerButtons = new Button[4];
+    private List<Button> answerButtons = new List<Button>();
     private int maxAnswers = 2;
     private int score = 0;
     private StyleColor originalButtonColor;
@@ -39,7 +40,7 @@ public class QuizHandler : MonoBehaviour
         currentQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
         container.Q<Label>("Question").text = currentQuestion.Question;
         container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
-        for (int i = 0; i < answerButtons.Length; i++)
+        for (int i = 0; i < answerButtons.Count; i++)
         {
             if (i < currentQuestion.Answers.Length)
             {
@@ -68,7 +69,7 @@ public class QuizHandler : MonoBehaviour
         {
             score++;
             audioSource.PlayOneShot(correctAnswerSound);
-            for (int i = 0; i < answerButtons.Length; i++)
+            for (int i = 0; i < answerButtons.Count; i++)
             {
                 int tempIndex = i; // Capture the index for the lambda
                 answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
@@ -83,7 +84,7 @@ public class QuizHandler : MonoBehaviour
             audioSource.PlayOneShot(wrongAnswerSound);
             if (maxAnswers <= 0)
             {
-                for (int i = 0; i < answerButtons.Length; i++)
+                for (int i = 0; i < answerButtons.Count; i++)
                 {
                     int tempIndex = i; // Capture the index for the lambda
                     answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);
@@ -116,7 +117,7 @@ public class QuizHandler : MonoBehaviour
             usedQuestions.Add(currentQuestion);
             container.Q<Label>("Question").text = currentQuestion.Question;
             container.Q<Label>("Score").text = "Score: " + score + "/" + currentQuestionIndex;
-            for (int i = 0; i < answerButtons.Length; i++)
+            for (int i = 0; i < answerButtons.Count; i++)
             {
                 if (i < currentQuestion.Answers.Length)
                 {
@@ -149,7 +150,7 @@ public class QuizHandler : MonoBehaviour
         if (uiDocument == null) uiDocument = gameObject.GetComponent<UIDocument>();
         var uiRoot = uiDocument.rootVisualElement;
         container = uiRoot.Q<VisualElement>("root");
-        if (answerButtons == null || answerButtons.Length == 0) { container.Query<Button>("Answer").ToList().CopyTo(answerButtons); }
+        if (answerButtons == null || answerButtons.Count == 0) {answerButtons = container.Query<Button>("Answer").ToList(); }
         isQuizDone = false;
         score = 0;
         currentQuestionIndex = 0;
@@ -172,7 +173,7 @@ public class QuizHandler : MonoBehaviour
         {
             if (timer > 0)
             {
-                timer -= 1 * Time.deltaTime;
+                timer -= 0.5f;
                 container.Q<ProgressBar>("Timer").value = timer;
                 container.Q<ProgressBar>("Timer").title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
             }
@@ -195,7 +196,7 @@ public class QuizHandler : MonoBehaviour
 
     private void ResetAnswers()
     {
-        for (int i = 0; i < answerButtons.Length; i++)
+        for (int i = 0; i < answerButtons.Count; i++)
         {
             int tempIndex = i; // Capture the index for the lambda
             answerButtons[i].clicked -= () => OnAnswerSelected(tempIndex);

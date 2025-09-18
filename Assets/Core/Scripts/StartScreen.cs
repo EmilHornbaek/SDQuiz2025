@@ -1,28 +1,22 @@
-using System;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Nullzone.Unity.Attributes;
+
 
 public class StartScreen : MonoBehaviour
 {
-    [SerializeField] private Transform StartButtonDestination;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private LerpState lerpSwitch;
+    [SerializeField, FieldName("Send Camera To:")] private Transform newCameraTarget;
+
     void Start()
     {
         UIDocument document = GetComponent<UIDocument>();
-        VisualElement root =  document.rootVisualElement;
+        VisualElement root = document.rootVisualElement;
         Button startButton = root.Q<Button>("StartButton");
-        startButton.clicked += () => {
-            LinearMovement lm = Camera.main.GetComponent<LinearMovement>();
-            lm.GoTo(StartButtonDestination);
+        startButton.clicked += () =>
+        {
+            LerpHandler lh = LerpHandler.Instance;
+            lh.MoveObjects(lerpSwitch, false, newCameraTarget);
         };
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

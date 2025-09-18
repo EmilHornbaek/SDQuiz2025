@@ -119,3 +119,6 @@
     border-bottom-width: 3px;
     border-left-width: 3px;
 }
+
+.back-button {
+}

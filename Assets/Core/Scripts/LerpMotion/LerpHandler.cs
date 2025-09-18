@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum LerpState
 {
@@ -8,24 +8,31 @@ public enum LerpState
     QuizEnd
 }
 
-public class LerpHandler : MonoBehaviour
+public class LerpHandler
 {
+    private static LerpHandler instance;
+    public static LerpHandler Instance
+    {
+        get
+        {
+            if (instance is null) instance = new LerpHandler();
+            return instance;
+        }
+    }
+
     private List<LerpMotion> lerpMotionObjects = new List<LerpMotion>();
     private LerpMotion cam;
 
-    void Start()
+    public LerpHandler()
     {
         // Ensures reference to a camera in the scene.
         // For multiple cameras, serialize the cam field and apply a camera in the inspector window.
-        if (cam == null)
+        if (cam is null)
         {
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("MainCamera"))
+            LerpMotion targetCamera = Camera.main.GetComponent<LerpMotion>();
+            if (targetCamera is not null)
             {
-                LerpMotion targetCamera = go.GetComponent<LerpMotion>();
-                if (targetCamera != null)
-                {
-                    cam = targetCamera;
-                }
+                cam = targetCamera;
             }
         }
         UpdateList();
