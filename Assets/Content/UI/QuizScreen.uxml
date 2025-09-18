@@ -1,6 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Content/UI/Styles/QuizScreen.uss?fileID=7433441132597879392&amp;guid=2d8ec18545f99134f82e4bff6d2bcc7d&amp;type=3#QuizScreen" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
+        <Nullzone.Unity.UIElements.AspectRatioElement width="15" focusable="false" y="1" x="1">
+            <ui:Button text="X" name="BackButton" class="back-button" style="border-top-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%; border-bottom-left-radius: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 100%; height: 100%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgb(255, 15, 15); color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 30px;" />
+        </Nullzone.Unity.UIElements.AspectRatioElement>
         <ui:ProgressBar value="54" name="Timer" high-value="60" style="align-self: stretch; border-top-left-radius: 15px; border-top-right-radius: 15px; color: rgb(255, 255, 255);" />
         <ui:Label name="Score" />
         <ui:Label name="Question" style="height: 148px; -unity-font-style: bold; -unity-text-outline-color: rgb(204, 153, 3); -unity-text-outline-width: 0;" />
