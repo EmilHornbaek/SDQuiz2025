@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: animalData
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: wrongAnswerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f3a8fa33151a3e44d842129a961adc01, type: 3}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: sourceAsset
       value: 
