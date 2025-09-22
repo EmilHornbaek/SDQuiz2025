@@ -119,6 +119,7 @@ public class QuizHandler : MonoBehaviour
 
     private void SetupRandomQuestion()
     {
+        // Tjek data
         if (animalData == null || animalData.QuizQuestions == null || animalData.QuizQuestions.Length == 0)
         {
             Debug.LogError("No quiz questions in AnimalData.");
@@ -132,7 +133,7 @@ public class QuizHandler : MonoBehaviour
             EndGame();
             return;
         }
-
+        
         QuizQuestion nextQuestion;
         int safety = 200;
         do
@@ -151,35 +152,90 @@ public class QuizHandler : MonoBehaviour
         if (answerButtons.Count > 0 && (originalButtonColor == default))
             originalButtonColor = answerButtons[0].style.backgroundColor;
 
-        // Bind svar
-        for (int i = 0; i < answerButtons.Count; i++)
+        // Sets the answers for this question with 1 correct and 3 wrong
+        List<QuizAnswer> answers = new List<QuizAnswer>();
+        while (answers.Count <= 4 || answers.Count != 0)
         {
-            var btn = answerButtons[i];
-            if (i < currentQuestion.Answers.Length)
+            List<QuizAnswer> temps = new List<QuizAnswer>(answers);
+            while (true)
             {
-                btn.text = currentQuestion.Answers[i].Answer;
-                int idx = i;
-                // Først fjern alle tidligere handlers (se note nedenfor)
-                btn.clicked -= _buttonHandlers[idx];
-                _buttonHandlers[idx] = () => OnAnswerSelected(idx);
-                btn.clicked += _buttonHandlers[idx];
-
-                btn.style.display = DisplayStyle.Flex;
-                btn.style.backgroundColor = originalButtonColor;
+                var ans = currentQuestion.Answers[Random.Range(0, currentQuestion.Answers.Length)];
+                if (ans.Allowed)
+                {
+                    answers.Add(ans);
+                    break;
+                }
+                else if (!temps.Contains(ans))
+                {
+                    temps.Add(ans);
+                }
+                if (temps.Count >= currentQuestion.Answers.Length) break;
             }
-            else
+            if (answers.Count == 1)
             {
-                btn.style.display = DisplayStyle.None;
+                while (true)
+                {
+                    var ans = currentQuestion.Answers[Random.Range(0, currentQuestion.Answers.Length)];
+                    if (!ans.Allowed && !answers.Contains(ans))
+                    {
+                        answers.Add(ans);
+                    }
+                    if (answers.Count >= 4) break;
+                }
             }
         }
 
-        timer = setTimer;
-        var pb = container.Q<ProgressBar>("Timer");
-        if (pb != null)
+        // Bind answers if we have exactly 4
+        if (answers.Count == 4)
         {
-            pb.value = timer;
-            pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+            // Shuffle answers
+            for (int i = 0; i < answers.Count * 2; i++)
+            {
+                var temp = answers[i];
+                int randomIndex = 99;
+                while (randomIndex == i)
+                {
+                    randomIndex = Random.Range(0, answers.Count);
+                }
+                answers[i] = answers[randomIndex];
+                answers[randomIndex] = temp;
+            }
+            // Binds answers to buttons
+            for (int i = 0; i < answerButtons.Count; i++)
+            {
+                var btn = answerButtons[i];
+                if (i < answers.Count)
+                {
+                    btn.text = answers[i].Answer;
+                    int idx = i;
+                    // Først fjern alle tidligere handlers (se note nedenfor)
+                    btn.clicked -= _buttonHandlers[idx];
+                    _buttonHandlers[idx] = () => OnAnswerSelected(idx);
+                    btn.clicked += _buttonHandlers[idx];
+
+                    btn.style.display = DisplayStyle.Flex;
+                    btn.style.backgroundColor = originalButtonColor;
+                }
+                else
+                {
+                    btn.style.display = DisplayStyle.None;
+                }
+            }
+
+            timer = setTimer;
+            var pb = container.Q<ProgressBar>("Timer");
+            if (pb != null)
+            {
+                pb.value = timer;
+                pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+            }
         }
+        // Hvis ikke, prøv igen
+        else
+        {
+            SetupRandomQuestion(); // Prøv igen
+        }
+        
     }
 
     // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
