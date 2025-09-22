@@ -26,6 +26,9 @@ public class AnimalSelection : MonoBehaviour
         
         foreach ( AnimalData animal in animals)
         {
+            PointData point = new PointData();
+            point.SetMaxPoints(animal.QuizQuestions.Length);
+            PlayerStats.Instance.Overview.Add(animal, point);
             VisualElement instance = template?.visualTreeAssetSource.Instantiate();
             AspectRatioElement aspectRatioElement = instance?.Q<AspectRatioElement>(name:"AspectRatioElement");
             Button button = aspectRatioElement?.Q<Button>(name: "AnimalButton");
