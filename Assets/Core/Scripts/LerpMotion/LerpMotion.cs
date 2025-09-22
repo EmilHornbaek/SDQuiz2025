@@ -11,9 +11,9 @@ public enum MovementType
 public class LerpMotion : MonoBehaviour
 {
     public Transform targetTransform;
-    [SerializeField] private bool lockZPosition;
-    [SerializeField] private float duration;
-    [SerializeField] private MovementType lerpMethod = MovementType.Linear;
+    [SerializeField] private bool lockZPosition = true;
+    [SerializeField] private float duration = 1;
+    [SerializeField] private MovementType lerpMethod = MovementType.Cubic;
     public LerpState lerpCondition;
     private TransformSnapshot originalTransform;
     private float elapsedTime;
@@ -63,13 +63,13 @@ public class LerpMotion : MonoBehaviour
         if (!inverse)
         {
             transform.position = Vector3.Lerp(originalTransform.position, targetPos, timeCompletion);
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(originalTransform.rotation.z, targetTransform.rotation.eulerAngles.z, timeCompletion));
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(originalTransform.rotation.eulerAngles.z, targetTransform.rotation.eulerAngles.z, timeCompletion));
             transform.localScale = Vector2.Lerp(originalTransform.localScale, targetTransform.localScale, timeCompletion);
         }
         else if (inverse)
         {
             transform.position = Vector3.Lerp(targetPos, originalTransform.position, timeCompletion);
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(targetTransform.rotation.eulerAngles.z, originalTransform.rotation.z, timeCompletion));
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(targetTransform.rotation.eulerAngles.z, originalTransform.rotation.eulerAngles.z, timeCompletion));
             transform.localScale = Vector2.Lerp(targetTransform.localScale, originalTransform.localScale, timeCompletion);
         }
         if (elapsedTime >= duration)

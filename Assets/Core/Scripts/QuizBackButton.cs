@@ -18,7 +18,7 @@ public class QuizBackButton : MonoBehaviour
             backButton.clicked += () =>
             {
                 LerpHandler lh = LerpHandler.Instance;
-                lh.MoveObjects(LerpState.QuizSelect, false, quizBackDestination, speedMultiplier);
+                lh.MoveObjects(LerpState.QuizSelect, true, quizBackDestination, speedMultiplier);
             };
         }
     }
