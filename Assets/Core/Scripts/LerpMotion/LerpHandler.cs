@@ -60,15 +60,15 @@ public class LerpHandler
     /// <param name="lerpState">The target LerpState.</param>
     /// <param name="inverse">If true, all activated lerp objects will run in reverse. Defaults to false.</param>
     /// <param name="cameraTarget">If given, sets a new transform target for the camera. Defaults to null.</param>
-    public void MoveObjects(LerpState lerpState, bool inverse = false, Transform cameraTarget = null)
+    public void MoveObjects(LerpState lerpState, bool inverse = false, Transform cameraTarget = null, float speedMultiplier)
     {
         if (cameraTarget != null) { cam.targetTransform = cameraTarget; }
-        cam.Move(inverse);
+        cam.Move(speedMultiplier: speedMultiplier);
         foreach (LerpMotion lm in lerpMotionObjects)
         {
             if (lm.lerpCondition == lerpState)
             {
-                lm.Move(inverse);
+                lm.Move(inverse, speedMultiplier);
             }
         }
     }

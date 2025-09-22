@@ -20,6 +20,7 @@ public class LerpMotion : MonoBehaviour
     private float timeCompletion;
     private bool active;
     private bool inverse;
+    private float speed;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class LerpMotion : MonoBehaviour
     {
         if (active)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime * speed;
             if (lerpMethod == MovementType.Linear) { timeCompletion = elapsedTime / duration; }
             else { timeCompletion = Cubic(elapsedTime / duration); }
             MoveUpdate();
@@ -42,12 +43,13 @@ public class LerpMotion : MonoBehaviour
     /// Starts the lerp motion if the object has a valid target transform.
     /// </summary>
     /// <param name="inverse">If true, runs the lerp motion in reverse. Defaults to false.</param>
-    public void Move(bool inverse = false)
+    public void Move(bool inverse = false, float speedMultiplier = 1)
     {
         if (targetTransform != null)
         {
             active = true;
             this.inverse = inverse;
+            this.speed = speedMultiplier;
         }
     }
 

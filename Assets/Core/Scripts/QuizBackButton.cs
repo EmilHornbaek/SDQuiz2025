@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 public class QuizBackButton : MonoBehaviour
 {
     [SerializeField, FieldName("Send Camera To:")] private Transform quizBackDestination;
+    [SerializeField] private float speedMultiplier = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +18,7 @@ public class QuizBackButton : MonoBehaviour
             backButton.clicked += () =>
             {
                 LerpHandler lh = LerpHandler.Instance;
-                lh.MoveObjects(LerpState.QuizSelect, false, quizBackDestination);
+                lh.MoveObjects(LerpState.QuizSelect, false, quizBackDestination, speedMultiplier);
             };
         }
     }

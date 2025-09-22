@@ -10,6 +10,7 @@ public class AnimalSelection : MonoBehaviour
 {
     [SerializeField, FieldName("Send Camera To:")] private Transform animalButtonDestination;
     [SerializeField] private LerpState lerpSwitch = LerpState.QuizSelect;
+    [SerializeField] private float speedMultiplier = 1;
 
     private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,7 +54,7 @@ public class AnimalSelection : MonoBehaviour
     private void GoToQuiz(AnimalData animalData)
     {
         LerpHandler lh = LerpHandler.Instance;
-        lh.MoveObjects(lerpSwitch, false, animalButtonDestination);
+        lh.MoveObjects(lerpSwitch, false, animalButtonDestination, speedMultiplier);
         QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
         quizHandler.SetAnimalData(animalData);
         quizHandler.ResetQuiz();
