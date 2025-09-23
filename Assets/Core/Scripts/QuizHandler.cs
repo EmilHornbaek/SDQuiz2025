@@ -280,7 +280,7 @@ public class QuizHandler : MonoBehaviour
             if (_buttonHandlers[index] != null)
                 btn.clicked -= _buttonHandlers[index];
 
-            btn.style.backgroundColor = Color.red;
+            btn.ToggleInClassList("wrong-answer");
             if (audioSource && wrongAnswerSound) audioSource.PlayOneShot(wrongAnswerSound);
 
             if (maxAnswers <= 0)

@@ -1,16 +1,23 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerStats
 {
+    public EventHandler<PointChangeArgs> OnPointChange;
+    public class PointChangeArgs : EventArgs
+    {
+        public int OldAmount;
+        public int NewAmount;
+    }
+
     private static PlayerStats instance;
     public static PlayerStats Instance { get { if (instance is null) instance = new PlayerStats(); return instance; } }
 
     public Dictionary<AnimalData, PointData> Overview = new Dictionary<AnimalData, PointData>();
     public int TotalPoints
     {
-        get {
+        get
+        {
             int points = 0;
             foreach (PointData pointData in Overview.Values)
             {
@@ -23,7 +30,19 @@ public class PlayerStats
 
 public struct PointData
 {
-    public int Points { get; private set; }
+    private int points;
+    public int Points
+    {
+        get => points; private set
+        {
+            PlayerStats.Instance.OnPointChange?.Invoke(this, new PlayerStats.PointChangeArgs
+            {
+                OldAmount = points,
+                NewAmount = value
+            });
+            points = value;
+        }
+    }
     public int MaxPoints { get; private set; }
 
     public void AddPoint()
@@ -31,7 +50,8 @@ public struct PointData
         Points = Math.Clamp(Points + 1, 0, MaxPoints);
     }
 
-    public void RemovePoint() {
+    public void RemovePoint()
+    {
         Points = Math.Clamp(Points - 1, 0, MaxPoints);
     }
 

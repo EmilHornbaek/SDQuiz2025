@@ -35,3 +35,75 @@ MonoBehaviour:
       UsesImage: 0
       Image: {fileID: 0}
       Allowed: 0
+  - Question: Neigh?
+    Answers:
+    - Answer: Yaaaaas
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
+    - Answer: Naaaaa
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Cudepoole
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Pissine
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+  - Question: Neigh?
+    Answers:
+    - Answer: Yaaaaas
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
+    - Answer: Naaaaa
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Cudepoole
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Pissine
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+  - Question: Neigh?
+    Answers:
+    - Answer: Yaaaaas
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
+    - Answer: Naaaaa
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Cudepoole
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Pissine
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+  - Question: Neigh?
+    Answers:
+    - Answer: Yaaaaas
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
+    - Answer: Naaaaa
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Cudepoole
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0
+    - Answer: Pissine
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 0

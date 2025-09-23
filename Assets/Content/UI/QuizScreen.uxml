@@ -7,9 +7,9 @@
         <ui:ProgressBar value="54" name="Timer" high-value="60" style="align-self: stretch; border-top-left-radius: 15px; border-top-right-radius: 15px; color: rgb(255, 255, 255);" />
         <ui:Label name="Score" />
         <ui:Label name="Question" style="height: 148px; -unity-font-style: bold; -unity-text-outline-color: rgb(204, 153, 3); -unity-text-outline-width: 0;" />
-        <ui:Button name="Answer" />
-        <ui:Button name="Answer" />
-        <ui:Button name="Answer" />
-        <ui:Button name="Answer" />
+        <ui:Button name="Answer" class="answer" />
+        <ui:Button name="Answer" class="answer" />
+        <ui:Button name="Answer" class="answer" />
+        <ui:Button name="Answer" class="answer" />
     </ui:VisualElement>
 </ui:UXML>

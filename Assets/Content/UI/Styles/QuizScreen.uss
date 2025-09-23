@@ -1,7 +1,7 @@
 :root {
 }
 
-#Answer {
+.answer {
     -unity-font-style: bold;
     font-size: 15px;
     color: rgb(204, 153, 3);
@@ -120,4 +120,8 @@
 }
 
 .back-button {
+}
+
+#Answer.wrong-answer {
+    background-color: rgb(153, 56, 56);
 }

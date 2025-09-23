@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static PlayerStats;
 
 public class AnimalSelection : MonoBehaviour
 {

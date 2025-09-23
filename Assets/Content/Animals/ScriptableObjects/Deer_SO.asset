@@ -16,4 +16,10 @@ MonoBehaviour:
   Sprite: {fileID: 0}
   Sound: {fileID: 0}
   Facts: []
-  QuizQuestions: []
+  QuizQuestions:
+  - Question: Bob the builder?
+    Answers:
+    - Answer: Build a bear
+      UsesImage: 0
+      Image: {fileID: 0}
+      Allowed: 1
