@@ -22,7 +22,7 @@ MonoBehaviour:
     - Answer: REEEEEEEEE
       UsesImage: 0
       Image: {fileID: 0}
-      Allowed: 0
+      Allowed: 1
     - Answer: Hello, Ben
       UsesImage: 0
       Image: {fileID: 0}

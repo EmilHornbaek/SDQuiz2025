@@ -117,126 +117,148 @@ public class QuizHandler : MonoBehaviour
         SetupRandomQuestion();
     }
 
+    private bool TryPickValidQuestion(out QuizQuestion validQuestion)
+    {
+        validQuestion = null;
+
+        // Kandidater: alle ubrugt
+        var pool = new List<QuizQuestion>();
+        foreach (var q in animalData.QuizQuestions)
+            if (!usedQuestions.Contains(q)) pool.Add(q);
+
+        if (pool.Count == 0) return false;
+
+        // Shuffle pool for tilfældig rækkefølge (Fisher–Yates)
+        for (int i = pool.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (pool[i], pool[j]) = (pool[j], pool[i]);
+        }
+
+        // Gå igennem indtil vi finder én med nok svar
+        foreach (var q in pool)
+        {
+            int correct = 0, wrong = 0;
+            foreach (var a in q.Answers)
+            {
+                if (a.Allowed) correct++; else wrong++;
+                if (correct >= 1 && wrong >= 3) break;
+            }
+            if (correct >= 1 && wrong >= 3)
+            {
+                validQuestion = q;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void SetupRandomQuestion()
     {
-        // Tjek data
+        // 1) Grundtjek
         if (animalData == null || animalData.QuizQuestions == null || animalData.QuizQuestions.Length == 0)
         {
             Debug.LogError("No quiz questions in AnimalData.");
             EndGame();
             return;
         }
-
-        // Slut hvis vi har brugt alle eller nået antal
         if (currentQuestionIndex >= numberOfQuestions || usedQuestions.Count >= animalData.QuizQuestions.Length)
         {
             EndGame();
             return;
         }
-        
-        QuizQuestion nextQuestion;
-        int safety = 200;
-        do
+
+        // 2) Find et gyldigt, ubrugt spørgsmål (med nok korrekte/for kerte)
+        if (!TryPickValidQuestion(out var nextQuestion))
         {
-            nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-        } while (usedQuestions.Contains(nextQuestion) && --safety > 0);
+            Debug.LogWarning("No remaining questions with at least 1 correct and 3 wrong answers.");
+            EndGame();
+            return;
+        }
 
         currentQuestion = nextQuestion;
         usedQuestions.Add(currentQuestion);
 
-        // UI
+        // 3) UI-tekster
         container.Q<Label>("Question").text = currentQuestion.Question;
         container.Q<Label>("Score").text = $"Score: {score}/{currentQuestionIndex}";
 
-        // Husk original farve én gang
         if (answerButtons.Count > 0 && (originalButtonColor == default))
             originalButtonColor = answerButtons[0].style.backgroundColor;
 
-        // Sets the answers for this question with 1 correct and 3 wrong
-        List<QuizAnswer> answers = new List<QuizAnswer>();
-        while (answers.Count <= 4 || answers.Count != 0)
+        // 4) Byg præcis 4 svar (1 korrekt + 3 forkerte)
+        var corrects = new List<QuizAnswer>();
+        var wrongs = new List<QuizAnswer>();
+        foreach (var a in currentQuestion.Answers)
+            if (a.Allowed) corrects.Add(a); else wrongs.Add(a);
+
+        // (burde være opfyldt pga. TryPickValidQuestion, men vi tjekker alligevel)
+        if (corrects.Count == 0 || wrongs.Count < 3)
         {
-            List<QuizAnswer> temps = new List<QuizAnswer>(answers);
-            while (true)
-            {
-                var ans = currentQuestion.Answers[Random.Range(0, currentQuestion.Answers.Length)];
-                if (ans.Allowed)
-                {
-                    answers.Add(ans);
-                    break;
-                }
-                else if (!temps.Contains(ans))
-                {
-                    temps.Add(ans);
-                }
-                if (temps.Count >= currentQuestion.Answers.Length) break;
-            }
-            if (answers.Count == 1)
-            {
-                while (true)
-                {
-                    var ans = currentQuestion.Answers[Random.Range(0, currentQuestion.Answers.Length)];
-                    if (!ans.Allowed && !answers.Contains(ans))
-                    {
-                        answers.Add(ans);
-                    }
-                    if (answers.Count >= 4) break;
-                }
-            }
+            Debug.LogWarning($"Selected question is no longer valid. Skipping.");
+            SetupRandomQuestion(); // sjælden fallback, men sikkert (meget lille dybde)
+            return;
         }
 
-        // Bind answers if we have exactly 4
-        if (answers.Count == 4)
+        var answers = new List<QuizAnswer>(4)
+    {
+        corrects[Random.Range(0, corrects.Count)]
+    };
+
+        // Vælg 3 forskellige forkerte
+        // Shuffle wrongs og tag de første 3
+        for (int i = wrongs.Count - 1; i > 0; i--)
         {
-            // Shuffle answers
-            for (int i = 0; i < answers.Count * 2; i++)
+            int j = Random.Range(0, i + 1);
+            (wrongs[i], wrongs[j]) = (wrongs[j], wrongs[i]);
+        }
+        answers.Add(wrongs[0]);
+        answers.Add(wrongs[1]);
+        answers.Add(wrongs[2]);
+
+        // 5) Shuffle svar (Fisher–Yates)
+        for (int i = answers.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (answers[i], answers[j]) = (answers[j], answers[i]);
+        }
+
+        // 6) Bind til knapper
+        for (int i = 0; i < answerButtons.Count; i++)
+        {
+            var btn = answerButtons[i];
+            if (i < answers.Count)
             {
-                var temp = answers[i];
-                int randomIndex = 99;
-                while (randomIndex == i)
-                {
-                    randomIndex = Random.Range(0, answers.Count);
-                }
-                answers[i] = answers[randomIndex];
-                answers[randomIndex] = temp;
-            }
-            // Binds answers to buttons
-            for (int i = 0; i < answerButtons.Count; i++)
-            {
-                var btn = answerButtons[i];
-                if (i < answers.Count)
-                {
-                    btn.text = answers[i].Answer;
-                    int idx = i;
-                    // Først fjern alle tidligere handlers (se note nedenfor)
+                btn.text = answers[i].Answer;
+                int idx = i;
+
+                if (_buttonHandlers[idx] != null)
                     btn.clicked -= _buttonHandlers[idx];
-                    _buttonHandlers[idx] = () => OnAnswerSelected(idx);
-                    btn.clicked += _buttonHandlers[idx];
 
-                    btn.style.display = DisplayStyle.Flex;
-                    btn.style.backgroundColor = originalButtonColor;
-                }
-                else
-                {
-                    btn.style.display = DisplayStyle.None;
-                }
+                _buttonHandlers[idx] = () => OnAnswerSelected(idx);
+                btn.clicked += _buttonHandlers[idx];
+
+                btn.style.display = DisplayStyle.Flex;
+                btn.style.backgroundColor = originalButtonColor;
             }
-
-            timer = setTimer;
-            var pb = container.Q<ProgressBar>("Timer");
-            if (pb != null)
+            else
             {
-                pb.value = timer;
-                pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
+                btn.style.display = DisplayStyle.None;
             }
         }
-        // Hvis ikke, prøv igen
-        else
+
+        // 7) Timer UI
+        timer = setTimer;
+        var pb = container.Q<ProgressBar>("Timer");
+        if (pb != null)
         {
-            SetupRandomQuestion(); // Prøv igen
+            pb.highValue = setTimer;
+            pb.value = timer;
+            pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
         }
-        
     }
+
 
     // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
     private readonly System.Action[] _buttonHandlers = new System.Action[8]; // antag max 8 svar-knapper; udvid hvis nødvendigt

@@ -10,7 +10,6 @@
     -unity-text-align: middle-center;
     -unity-text-outline-color: rgb(91, 91, 91);
     -unity-text-outline-width: 0;
-    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=d43e962d7c8731445af90b7ece668d49&type=3#NotInter-Regular");
     word-spacing: 0;
     letter-spacing: 10px;
     border-top-left-radius: 20px;
