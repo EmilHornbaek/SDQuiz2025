@@ -17,6 +17,7 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip correctAnswerSound;
     [SerializeField] private AudioClip wrongAnswerSound;
     [SerializeField] private AudioClip victorySound;
+    [SerializeField] private AudioClip quizMusic;
 
     private float timer;
     private List<QuizQuestion> usedQuestions = new List<QuizQuestion>();
@@ -54,9 +55,7 @@ public class QuizHandler : MonoBehaviour
 
     void Start()
     {
-
         // Start rigtigt i stedet for at antage at felter er sat
-
     }
 
     public void Update()
@@ -112,6 +111,13 @@ public class QuizHandler : MonoBehaviour
         }
 
         if (!firstStart) ResetAnswers(); else firstStart = false;
+
+        if (quizMusic is not null && audioSource is not null)
+        {
+            audioSource.clip = quizMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
 
         // Første spørgsmål
         SetupRandomQuestion();
@@ -322,6 +328,10 @@ public class QuizHandler : MonoBehaviour
     private void EndGame()
     {
         isQuizDone = true;
+        if (quizMusic is not null && audioSource)
+        {
+            audioSource.Stop();
+        }
         // TODO: Vis endeskærm
     }
 
