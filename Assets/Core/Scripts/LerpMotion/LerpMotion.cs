@@ -15,6 +15,7 @@ public class LerpMotion : MonoBehaviour
     [SerializeField] private float duration = 1;
     [SerializeField] private MovementType lerpMethod = MovementType.Cubic;
     public LerpState lerpCondition;
+    [SerializeField] private bool hideWhenIdle = false;
     private TransformSnapshot originalTransform;
     private float elapsedTime;
     private float timeCompletion;
@@ -26,6 +27,7 @@ public class LerpMotion : MonoBehaviour
     {
         // Sets the original transforms of the object.
         originalTransform = transform.Snapshot();
+        if (hideWhenIdle) { gameObject.GetComponent<SpriteRenderer>().enabled = false; }
     }
 
     void Update()
@@ -50,6 +52,7 @@ public class LerpMotion : MonoBehaviour
             active = true;
             this.inverse = inverse;
             this.speed = speedMultiplier;
+            if (hideWhenIdle) { gameObject.GetComponent<SpriteRenderer>().enabled = true; }
         }
     }
 
@@ -83,6 +86,7 @@ public class LerpMotion : MonoBehaviour
                 newOrigin.position = targetPos;
                 originalTransform = newOrigin;
             }
+            if (hideWhenIdle) { gameObject.GetComponent<SpriteRenderer>().enabled = false; }
         }
     }
 
