@@ -11,15 +11,16 @@ public enum MovementType
 public class LerpMotion : MonoBehaviour
 {
     public Transform targetTransform;
-    [SerializeField] private bool lockZPosition;
-    [SerializeField] private float duration;
-    [SerializeField] private MovementType lerpMethod = MovementType.Linear;
+    [SerializeField] private bool lockZPosition = true;
+    [SerializeField] private float duration = 1;
+    [SerializeField] private MovementType lerpMethod = MovementType.Cubic;
     public LerpState lerpCondition;
     private TransformSnapshot originalTransform;
     private float elapsedTime;
     private float timeCompletion;
     private bool active;
     private bool inverse;
+    private float speed;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class LerpMotion : MonoBehaviour
     {
         if (active)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime * speed;
             if (lerpMethod == MovementType.Linear) { timeCompletion = elapsedTime / duration; }
             else { timeCompletion = Cubic(elapsedTime / duration); }
             MoveUpdate();
@@ -42,12 +43,13 @@ public class LerpMotion : MonoBehaviour
     /// Starts the lerp motion if the object has a valid target transform.
     /// </summary>
     /// <param name="inverse">If true, runs the lerp motion in reverse. Defaults to false.</param>
-    public void Move(bool inverse = false)
+    public void Move(bool inverse = false, float speedMultiplier = 1)
     {
         if (targetTransform != null)
         {
             active = true;
             this.inverse = inverse;
+            this.speed = speedMultiplier;
         }
     }
 
@@ -61,13 +63,13 @@ public class LerpMotion : MonoBehaviour
         if (!inverse)
         {
             transform.position = Vector3.Lerp(originalTransform.position, targetPos, timeCompletion);
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(originalTransform.rotation.z, targetTransform.rotation.eulerAngles.z, timeCompletion));
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(originalTransform.rotation.eulerAngles.z, targetTransform.rotation.eulerAngles.z, timeCompletion));
             transform.localScale = Vector2.Lerp(originalTransform.localScale, targetTransform.localScale, timeCompletion);
         }
         else if (inverse)
         {
             transform.position = Vector3.Lerp(targetPos, originalTransform.position, timeCompletion);
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(targetTransform.rotation.eulerAngles.z, originalTransform.rotation.z, timeCompletion));
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(targetTransform.rotation.eulerAngles.z, originalTransform.rotation.eulerAngles.z, timeCompletion));
             transform.localScale = Vector2.Lerp(targetTransform.localScale, originalTransform.localScale, timeCompletion);
         }
         if (elapsedTime >= duration)

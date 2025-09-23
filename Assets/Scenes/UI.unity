@@ -149,6 +149,10 @@ PrefabInstance:
       value: AnimalSelection
       objectReference: {fileID: 0}
     - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
+      propertyPath: speedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
       propertyPath: animalButtonDestination
       value: 
       objectReference: {fileID: 1987827757}
@@ -299,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen
   lerpSwitch: 0
   newCameraTarget: {fileID: 1418559230}
+  speedMultiplier: 1
 --- !u!1001 &1987827756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   quizBackDestination: {fileID: 1418559230}
+  speedMultiplier: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

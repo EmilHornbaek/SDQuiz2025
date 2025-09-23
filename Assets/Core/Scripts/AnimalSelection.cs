@@ -13,6 +13,7 @@ public class AnimalSelection : MonoBehaviour
     [SerializeField] private LerpState lerpSwitch = LerpState.QuizSelect;
     private Dictionary<Label, AnimalData> pointLabelLink = new Dictionary<Label, AnimalData>();
     private AudioSource audioSource;
+    [SerializeField] private float speedMultiplier = 1;
 
     private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,7 +71,7 @@ public class AnimalSelection : MonoBehaviour
         }
 
         LerpHandler lh = LerpHandler.Instance;
-        lh.MoveObjects(lerpSwitch, false, animalButtonDestination);
+        lh.MoveObjects(lerpSwitch, false, animalButtonDestination, speedMultiplier);
         QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
         quizHandler.SetAnimalData(animalData);
         quizHandler.ResetQuiz();
