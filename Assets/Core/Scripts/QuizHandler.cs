@@ -55,7 +55,6 @@ public class QuizHandler : MonoBehaviour
 
     void Start()
     {
-        // Start rigtigt i stedet for at antage at felter er sat
     }
 
     public void Update()
@@ -246,7 +245,7 @@ public class QuizHandler : MonoBehaviour
                 btn.clicked += _buttonHandlers[idx];
 
                 btn.style.display = DisplayStyle.Flex;
-                btn.style.backgroundColor = originalButtonColor;
+                btn.EnableInClassList("wrong-answer", false);
             }
             else
             {
@@ -344,7 +343,7 @@ public class QuizHandler : MonoBehaviour
             if (_buttonHandlers[i] != null)
                 answerButtons[i].clicked -= _buttonHandlers[i];
 
-            answerButtons[i].style.backgroundColor = originalButtonColor;
+            answerButtons[i].EnableInClassList("wrong-answer", false);
         }
     }
 }

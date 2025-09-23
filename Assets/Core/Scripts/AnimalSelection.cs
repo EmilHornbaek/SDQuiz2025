@@ -66,7 +66,7 @@ public class AnimalSelection : MonoBehaviour
 
     private void GoToQuiz(AnimalData animalData)
     {
-        if (audioSource is not null && animalData.Sound is not null)
+        if (audioSource != null && animalData.Sound != null)
         {
             audioSource.PlayOneShot(animalData.Sound);
         }
