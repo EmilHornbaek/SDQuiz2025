@@ -75,6 +75,7 @@ MonoBehaviour:
   correctAnswerSound: {fileID: 0}
   wrongAnswerSound: {fileID: 0}
   victorySound: {fileID: 0}
+  quizMusic: {fileID: 0}
 --- !u!82 &7395826315152625290
 AudioSource:
   m_ObjectHideFlags: 0
