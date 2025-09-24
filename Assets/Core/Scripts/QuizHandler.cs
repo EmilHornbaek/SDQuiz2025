@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System;
 
 public class QuizHandler : MonoBehaviour
 {
@@ -20,8 +21,10 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip quizMusic;
 
     private float timer;
+    private static System.Random random;
     private List<QuizQuestion> usedQuestions = new List<QuizQuestion>();
     private QuizQuestion currentQuestion;
+    private List<QuizAnswer> currentAnswers = new List<QuizAnswer>();
     private int currentQuestionIndex = 0;
     private List<Button> answerButtons = new List<Button>();
     private int maxAnswers = 2;
@@ -39,6 +42,8 @@ public class QuizHandler : MonoBehaviour
         // Hent komponenter TIDLIGT
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
+
+        if (random == null) random = new System.Random(DateTime.Now.Millisecond);
 
         if (uiDocument != null)
         {
@@ -134,11 +139,7 @@ public class QuizHandler : MonoBehaviour
         if (pool.Count == 0) return false;
 
         // Shuffle pool for tilfældig rækkefølge (Fisher–Yates)
-        for (int i = pool.Count - 1; i > 0; i--)
-        {
-            int j = Random.Range(0, i + 1);
-            (pool[i], pool[j]) = (pool[j], pool[i]);
-        }
+        pool = Shuffle<QuizQuestion>(pool);
 
         // Gå igennem indtil vi finder én med nok svar
         foreach (var q in pool)
@@ -206,28 +207,21 @@ public class QuizHandler : MonoBehaviour
             return;
         }
 
-        var answers = new List<QuizAnswer>(4)
-    {
-        corrects[Random.Range(0, corrects.Count)]
-    };
+        // 5) Vælg tilfældigt 1 korrekt og 3 forkerte
+        List<QuizAnswer> answers = new List<QuizAnswer>();
+        answers.Add(corrects[random.Next(0, corrects.Count)]);
 
-        // Vælg 3 forskellige forkerte
-        // Shuffle wrongs og tag de første 3
-        for (int i = wrongs.Count - 1; i > 0; i--)
-        {
-            int j = Random.Range(0, i + 1);
-            (wrongs[i], wrongs[j]) = (wrongs[j], wrongs[i]);
-        }
+        wrongs = Shuffle<QuizAnswer>(wrongs);
         answers.Add(wrongs[0]);
         answers.Add(wrongs[1]);
         answers.Add(wrongs[2]);
 
-        // 5) Shuffle svar (Fisher–Yates)
-        for (int i = answers.Count - 1; i > 0; i--)
-        {
-            int j = Random.Range(0, i + 1);
-            (answers[i], answers[j]) = (answers[j], answers[i]);
-        }
+        // Shuffle svarene
+        answers = Shuffle<QuizAnswer>(answers);
+
+        currentAnswers = answers;
+
+        ResetAnswers();
 
         // 6) Bind til knapper
         for (int i = 0; i < answerButtons.Count; i++)
@@ -270,7 +264,7 @@ public class QuizHandler : MonoBehaviour
 
     private void OnAnswerSelected(int index)
     {
-        if (currentQuestion.Answers[index].Allowed)
+        if (currentAnswers[index].Allowed)
         {
             score++;
             if (audioSource && correctAnswerSound) audioSource.PlayOneShot(correctAnswerSound);
@@ -320,7 +314,7 @@ public class QuizHandler : MonoBehaviour
             EndGame();
             return;
         }
-
+        maxAnswers = 2;
         SetupRandomQuestion();
     }
 
@@ -345,5 +339,18 @@ public class QuizHandler : MonoBehaviour
 
             answerButtons[i].EnableInClassList("wrong-answer", false);
         }
+    }
+
+    private List<T> Shuffle<T>(List<T> collection)
+    {
+        int shuffleDepth = DateTime.Now.Millisecond - (int)(Time.deltaTime*10f);
+        if (shuffleDepth < 0) shuffleDepth *= -1;
+        for (int i = collection.Count - 1; i > 0 && shuffleDepth > 0; i--, shuffleDepth--)
+        {
+            int j = random.Next(0, i + 1);
+            (collection[i], collection[j]) = (collection[j], collection[i]);
+        }
+
+        return collection;
     }
 }
