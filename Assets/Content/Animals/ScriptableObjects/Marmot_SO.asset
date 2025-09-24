@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Marmot_SO
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
   Name: Marmot
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2800000, guid: 77f3fe6ced092ba478f0fce1e7d794d3, type: 3}
   Sound: {fileID: 0}
   Facts: []
   QuizQuestions: []

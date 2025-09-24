@@ -1,12 +1,10 @@
 using Nullzone.Unity.Attributes;
 using Nullzone.Unity.UIElements;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static PlayerStats;
 
 public class AnimalSelection : MonoBehaviour
 {
@@ -26,25 +24,33 @@ public class AnimalSelection : MonoBehaviour
         UIDocument ui = GetComponent<UIDocument>();
         var root = ui.rootVisualElement;
         mainElement = root.Q<VisualElement>("animal-container");
-        VisualElement template = mainElement.Q<TemplateContainer>(name:"Template");
+        VisualElement template = mainElement.Q<TemplateContainer>(name: "Template");
         template?.RemoveFromHierarchy();
 
         mainElement?.AddToClassList("disabled");
-        
-        foreach ( AnimalData animal in animals)
+
+        foreach (AnimalData animal in animals)
         {
             PointData point = new PointData();
             point.SetMaxPoints(animal.QuizQuestions.Length);
             PlayerStats.Instance.Overview.Add(animal, point);
             VisualElement instance = template?.visualTreeAssetSource.Instantiate();
-            AspectRatioElement aspectRatioElement = instance?.Q<AspectRatioElement>(name:"AspectRatioElement");
+            AspectRatioElement aspectRatioElement = instance?.Q<AspectRatioElement>(name: "AspectRatioElement");
             Button button = aspectRatioElement?.Q<Button>(name: "AnimalButton");
             Label label = aspectRatioElement?.Q<Label>(name: "PointLabel");
 
             if (button is null || aspectRatioElement is null || mainElement is null || label is null) return;
 
-            if (animal.Sprite is not null) button.style.backgroundImage = new StyleBackground(animal.Sprite);
-            button.text = animal.Name;
+            if (animal.Sprite == null)
+            {
+                button.text = animal.Name;
+            }
+            else
+            {
+                button.style.backgroundImage = new StyleBackground(animal.Sprite);
+                button.text = "";
+            }
+
             button.clicked += () => GoToQuiz(animal);
             label.text = $"{PlayerStats.Instance.Overview[animal].Points} / {PlayerStats.Instance.Overview[animal].MaxPoints}";
 
