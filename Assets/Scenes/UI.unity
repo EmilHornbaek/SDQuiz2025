@@ -320,6 +320,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6364208696293770204, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: quizBackDestination
+      value: 
+      objectReference: {fileID: 1418559230}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: returnTimerDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: sourceAsset
       value: 
