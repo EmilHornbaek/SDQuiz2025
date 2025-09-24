@@ -10,6 +10,7 @@ public class UpgradeStage : MonoBehaviour
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
         if (PlayerStats.Instance.TotalPoints < showCondition) { sr.enabled = false; }
+        PlayerStats.Instance.OnPointChange += OnPointChange;
     }
 
     private void OnPointChange(object sender, PlayerStats.PointChangeArgs args)

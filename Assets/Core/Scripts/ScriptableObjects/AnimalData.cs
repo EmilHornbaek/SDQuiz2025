@@ -35,7 +35,7 @@ public class QuizAnswer
 {
     public string Answer;
 
-    [Tooltip("This is not implemented yet! but will allow for images instead of text")]
+    [Tooltip("This is not implemented yet! but if true will allow for images instead of text")]
     public bool UsesImage;
     public Texture2D Image;
 
