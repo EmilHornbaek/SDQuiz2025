@@ -7,6 +7,7 @@ public class StartScreen : MonoBehaviour
 {
     [SerializeField] private LerpState lerpSwitch;
     [SerializeField, FieldName("Send Camera To:")] private Transform newCameraTarget;
+    [SerializeField] private float speedMultiplier = 1;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class StartScreen : MonoBehaviour
         startButton.clicked += () =>
         {
             LerpHandler lh = LerpHandler.Instance;
-            lh.MoveObjects(lerpSwitch, false, newCameraTarget);
+            lh.MoveObjects(lerpSwitch, false, newCameraTarget, speedMultiplier);
         };
     }
 }

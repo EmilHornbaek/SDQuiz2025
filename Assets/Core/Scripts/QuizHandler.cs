@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System;
 
 public class QuizHandler : MonoBehaviour
 {
@@ -17,10 +18,13 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip correctAnswerSound;
     [SerializeField] private AudioClip wrongAnswerSound;
     [SerializeField] private AudioClip victorySound;
+    [SerializeField] private AudioClip quizMusic;
 
     private float timer;
+    private static System.Random random;
     private List<QuizQuestion> usedQuestions = new List<QuizQuestion>();
     private QuizQuestion currentQuestion;
+    private List<QuizAnswer> currentAnswers = new List<QuizAnswer>();
     private int currentQuestionIndex = 0;
     private List<Button> answerButtons = new List<Button>();
     private int maxAnswers = 2;
@@ -39,6 +43,8 @@ public class QuizHandler : MonoBehaviour
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
 
+        if (random == null) random = new System.Random(DateTime.Now.Millisecond);
+
         if (uiDocument != null)
         {
             var uiRoot = uiDocument.rootVisualElement;
@@ -54,9 +60,6 @@ public class QuizHandler : MonoBehaviour
 
     void Start()
     {
-
-        // Start rigtigt i stedet for at antage at felter er sat
-
     }
 
     public void Update()
@@ -113,59 +116,130 @@ public class QuizHandler : MonoBehaviour
 
         if (!firstStart) ResetAnswers(); else firstStart = false;
 
+        if (quizMusic is not null && audioSource is not null)
+        {
+            audioSource.clip = quizMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
         // Første spørgsmål
         SetupRandomQuestion();
     }
 
+    private bool TryPickValidQuestion(out QuizQuestion validQuestion)
+    {
+        validQuestion = null;
+
+        // Kandidater: alle ubrugt
+        var pool = new List<QuizQuestion>();
+        foreach (var q in animalData.QuizQuestions)
+            if (!usedQuestions.Contains(q)) pool.Add(q);
+
+        if (pool.Count == 0) return false;
+
+        // Shuffle pool for tilfældig rækkefølge (Fisher–Yates)
+        pool = Shuffle<QuizQuestion>(pool);
+
+        // Gå igennem indtil vi finder én med nok svar
+        foreach (var q in pool)
+        {
+            int correct = 0, wrong = 0;
+            foreach (var a in q.Answers)
+            {
+                if (a.Allowed) correct++; else wrong++;
+                if (correct >= 1 && wrong >= 3) break;
+            }
+            if (correct >= 1 && wrong >= 3)
+            {
+                validQuestion = q;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void SetupRandomQuestion()
     {
+        // 1) Grundtjek
         if (animalData == null || animalData.QuizQuestions == null || animalData.QuizQuestions.Length == 0)
         {
             Debug.LogError("No quiz questions in AnimalData.");
             EndGame();
             return;
         }
-
-        // Slut hvis vi har brugt alle eller nået antal
         if (currentQuestionIndex >= numberOfQuestions || usedQuestions.Count >= animalData.QuizQuestions.Length)
         {
             EndGame();
             return;
         }
 
-        QuizQuestion nextQuestion;
-        int safety = 200;
-        do
+        // 2) Find et gyldigt, ubrugt spørgsmål (med nok korrekte/for kerte)
+        if (!TryPickValidQuestion(out var nextQuestion))
         {
-            nextQuestion = animalData.QuizQuestions[Random.Range(0, animalData.QuizQuestions.Length)];
-        } while (usedQuestions.Contains(nextQuestion) && --safety > 0);
+            Debug.LogWarning("No remaining questions with at least 1 correct and 3 wrong answers.");
+            EndGame();
+            return;
+        }
 
         currentQuestion = nextQuestion;
         usedQuestions.Add(currentQuestion);
 
-        // UI
+        // 3) UI-tekster
         container.Q<Label>("Question").text = currentQuestion.Question;
         container.Q<Label>("Score").text = $"Score: {score}/{currentQuestionIndex}";
 
-        // Husk original farve én gang
         if (answerButtons.Count > 0 && (originalButtonColor == default))
             originalButtonColor = answerButtons[0].style.backgroundColor;
 
-        // Bind svar
+        // 4) Byg præcis 4 svar (1 korrekt + 3 forkerte)
+        var corrects = new List<QuizAnswer>();
+        var wrongs = new List<QuizAnswer>();
+        foreach (var a in currentQuestion.Answers)
+            if (a.Allowed) corrects.Add(a); else wrongs.Add(a);
+
+        // (burde være opfyldt pga. TryPickValidQuestion, men vi tjekker alligevel)
+        if (corrects.Count == 0 || wrongs.Count < 3)
+        {
+            Debug.LogWarning($"Selected question is no longer valid. Skipping.");
+            SetupRandomQuestion(); // sjælden fallback, men sikkert (meget lille dybde)
+            return;
+        }
+
+        // 5) Vælg tilfældigt 1 korrekt og 3 forkerte
+        List<QuizAnswer> answers = new List<QuizAnswer>();
+        answers.Add(corrects[random.Next(0, corrects.Count)]);
+
+        wrongs = Shuffle<QuizAnswer>(wrongs);
+        answers.Add(wrongs[0]);
+        answers.Add(wrongs[1]);
+        answers.Add(wrongs[2]);
+
+        // Shuffle svarene
+        answers = Shuffle<QuizAnswer>(answers);
+
+        currentAnswers = answers;
+
+        ResetAnswers();
+
+        // 6) Bind til knapper
         for (int i = 0; i < answerButtons.Count; i++)
         {
             var btn = answerButtons[i];
-            if (i < currentQuestion.Answers.Length)
+            if (i < answers.Count)
             {
-                btn.text = currentQuestion.Answers[i].Answer;
+                btn.text = answers[i].Answer;
                 int idx = i;
-                // Først fjern alle tidligere handlers (se note nedenfor)
-                btn.clicked -= _buttonHandlers[idx];
+
+                if (_buttonHandlers[idx] != null)
+                    btn.clicked -= _buttonHandlers[idx];
+
                 _buttonHandlers[idx] = () => OnAnswerSelected(idx);
                 btn.clicked += _buttonHandlers[idx];
 
                 btn.style.display = DisplayStyle.Flex;
-                btn.style.backgroundColor = originalButtonColor;
+                btn.EnableInClassList("wrong-answer", false);
             }
             else
             {
@@ -173,21 +247,24 @@ public class QuizHandler : MonoBehaviour
             }
         }
 
+        // 7) Timer UI
         timer = setTimer;
         var pb = container.Q<ProgressBar>("Timer");
         if (pb != null)
         {
+            pb.highValue = setTimer;
             pb.value = timer;
             pb.title = "Tid tilbage: " + Mathf.CeilToInt(timer) + "s";
         }
     }
+
 
     // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
     private readonly System.Action[] _buttonHandlers = new System.Action[8]; // antag max 8 svar-knapper; udvid hvis nødvendigt
 
     private void OnAnswerSelected(int index)
     {
-        if (currentQuestion.Answers[index].Allowed)
+        if (currentAnswers[index].Allowed)
         {
             score++;
             if (audioSource && correctAnswerSound) audioSource.PlayOneShot(correctAnswerSound);
@@ -202,7 +279,7 @@ public class QuizHandler : MonoBehaviour
             if (_buttonHandlers[index] != null)
                 btn.clicked -= _buttonHandlers[index];
 
-            btn.style.backgroundColor = Color.red;
+            btn.ToggleInClassList("wrong-answer");
             if (audioSource && wrongAnswerSound) audioSource.PlayOneShot(wrongAnswerSound);
 
             if (maxAnswers <= 0)
@@ -237,13 +314,17 @@ public class QuizHandler : MonoBehaviour
             EndGame();
             return;
         }
-
+        maxAnswers = 2;
         SetupRandomQuestion();
     }
 
     private void EndGame()
     {
         isQuizDone = true;
+        if (quizMusic is not null && audioSource)
+        {
+            audioSource.Stop();
+        }
         // TODO: Vis endeskærm
     }
 
@@ -256,7 +337,20 @@ public class QuizHandler : MonoBehaviour
             if (_buttonHandlers[i] != null)
                 answerButtons[i].clicked -= _buttonHandlers[i];
 
-            answerButtons[i].style.backgroundColor = originalButtonColor;
+            answerButtons[i].EnableInClassList("wrong-answer", false);
         }
+    }
+
+    private List<T> Shuffle<T>(List<T> collection)
+    {
+        int shuffleDepth = DateTime.Now.Millisecond - (int)(Time.deltaTime*10f);
+        if (shuffleDepth < 0) shuffleDepth *= -1;
+        for (int i = collection.Count - 1; i > 0 && shuffleDepth > 0; i--, shuffleDepth--)
+        {
+            int j = random.Next(0, i + 1);
+            (collection[i], collection[j]) = (collection[j], collection[i]);
+        }
+
+        return collection;
     }
 }
