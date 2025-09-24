@@ -2,6 +2,7 @@
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System;
+using Nullzone.Unity.Attributes;
 
 public class QuizHandler : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip wrongAnswerSound;
     [SerializeField] private AudioClip victorySound;
     [SerializeField] private AudioClip quizMusic;
+
+    [Header("Return Settings")]
+    [SerializeField] private float speedMultiplier = 1;
+    [SerializeField, FieldName("End Screen Duration")] private float returnTimerDuration;
+    [SerializeField, FieldName("Send Camera To:")] private Transform quizBackDestination;
+    private float returnTimer;
+    private bool countdown = false;
 
     private float timer;
     private static System.Random random;
@@ -66,6 +74,22 @@ public class QuizHandler : MonoBehaviour
     {
         if (isQuizDone || firstStart) return;
 
+        if (returnTimer <= 0 && countdown)
+        {
+            isQuizDone = true;
+            countdown = false;
+            if (quizMusic is not null && audioSource)
+            {
+                audioSource.Stop();
+            }
+            LerpHandler lh = LerpHandler.Instance;
+            lh.MoveObjects(LerpState.QuizSelect, true, quizBackDestination, speedMultiplier);
+        }
+        else if (countdown)
+        {
+            returnTimer -= Time.deltaTime;
+        }
+
         if (timer > 0f)
         {
             timer -= Time.deltaTime;
@@ -85,6 +109,8 @@ public class QuizHandler : MonoBehaviour
 
     public void ResetQuiz()
     {
+        //uiDocument.enabled = true;
+
         if (container == null)
         {
             Debug.LogError("Container (root VisualElement) not found. Ensure UIDocument has a 'root' element.");
@@ -329,12 +355,13 @@ public class QuizHandler : MonoBehaviour
 
     private void EndGame()
     {
-        isQuizDone = true;
-        if (quizMusic is not null && audioSource)
-        {
-            audioSource.Stop();
-        }
         // TODO: Vis endeskærm
+
+        //uiDocument.enabled = false;
+        LerpHandler lh = LerpHandler.Instance;
+        lh.MoveObjects(LerpState.QuizEnd, false, null, speedMultiplier);
+        returnTimer = returnTimerDuration;
+        countdown = true;
     }
 
     public void SetAnimalData(AnimalData data) => animalData = data;

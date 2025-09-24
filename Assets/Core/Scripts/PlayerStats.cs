@@ -28,7 +28,7 @@ public class PlayerStats
     }
 }
 
-public struct PointData
+public class PointData
 {
     private int points;
     public int Points
