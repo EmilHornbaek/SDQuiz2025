@@ -302,7 +302,6 @@ public class QuizHandler : MonoBehaviour
                     PlayerStats.Instance.Overview[animalData].AddPoint();
                 }
             }
-            
             UnsubscribeAllButtons();
             NextQuestion();
         }
