@@ -27,6 +27,8 @@ public class QuizQuestion
 {
     public string Question;
     public QuizAnswer[] Answers;
+    [NonSerialized]
+    public bool guessedCorrectly;
 }
 [Serializable]
 public class QuizAnswer

@@ -268,6 +268,15 @@ public class QuizHandler : MonoBehaviour
         {
             score++;
             if (audioSource && correctAnswerSound) audioSource.PlayOneShot(correctAnswerSound);
+            if (!animalData.QuizQuestions[currentQuestionIndex].guessedCorrectly)
+            {
+                animalData.QuizQuestions[currentQuestionIndex].guessedCorrectly = true;
+                if (PlayerStats.Instance != null)
+                {
+                    PlayerStats.Instance.Overview[animalData].AddPoint();
+                }
+            }
+            
             UnsubscribeAllButtons();
             NextQuestion();
         }
