@@ -153,6 +153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: acb943b56556ef947a7e50e1af9ba022, type: 3}
     - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
+      propertyPath: buttonTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: b45b57dcaf8975f45822dbba17e9dc65, type: 3}
+    - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
       propertyPath: speedMultiplier
       value: 1
       objectReference: {fileID: 0}
@@ -306,8 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartScreen
   style: {fileID: 7433441132597879392, guid: cc0d48a769f19ae468839d93e60d6678, type: 3}
-  lerpSwitch: 0
-  newCameraTarget: {fileID: 1418559230}
   speedMultiplier: 1
   newCameraTarget: {fileID: 1418559230}
 --- !u!1001 &1987827756

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Nullzone.Unity.UIElements
@@ -10,7 +11,7 @@ namespace Nullzone.Unity.UIElements
         Int         // absolute pixel width, rounded
     }
 
-    [UxmlElement]
+    [UxmlElement, Preserve]
     public partial class AspectRatioElement : VisualElement
     {
         private float aspectRatioX = 1f;

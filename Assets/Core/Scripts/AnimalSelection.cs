@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
+    [SerializeField] private VisualTreeAsset buttonTemplate;
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening upon selecting a quiz.")] private float speedMultiplier = 1;
     [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent to upon selecting a quiz.")] private Transform animalButtonDestination;
@@ -20,7 +21,6 @@ public class AnimalSelection : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
         AnimalData[] animals = Resources.LoadAll<AnimalData>("ScriptableObjects");
         UIDocument ui = GetComponent<UIDocument>();
         var root = ui.rootVisualElement;
@@ -37,11 +37,11 @@ public class AnimalSelection : MonoBehaviour
 
             if (!PlayerStats.Instance.Overview.ContainsKey(animal))
                 PlayerStats.Instance.Overview.Add(animal, point);
-            
-            VisualElement instance = template?.visualTreeAssetSource.Instantiate();
-            AspectRatioElement aspectRatioElement = instance?.Q<AspectRatioElement>(name: "AspectRatioElement");
-            Button button = aspectRatioElement?.Q<Button>(name: "AnimalButton");
-            Label label = aspectRatioElement?.Q<Label>(name: "PointLabel");
+
+            TemplateContainer clone = buttonTemplate.CloneTree();
+            AspectRatioElement aspectRatioElement = clone?.Q<AspectRatioElement>(name: "AspectRatioElement");
+            Button button = clone?.Q<Button>(name: "AnimalButton");
+            Label label = clone?.Q<Label>(name: "PointLabel");
 
             point.SetLabel(label);
 
