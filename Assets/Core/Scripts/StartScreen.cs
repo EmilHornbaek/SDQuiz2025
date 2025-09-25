@@ -6,9 +6,9 @@ using Nullzone.Unity.Attributes;
 public class StartScreen : MonoBehaviour
 {
     [SerializeField] private StyleSheet style;
-    [SerializeField] private LerpState lerpSwitch;
-    [SerializeField, FieldName("Send Camera To:")] private Transform newCameraTarget;
-    [SerializeField] private float speedMultiplier = 1;
+    private LerpState lerpSwitch = LerpState.Play;
+    [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening upon pressing play.")] private float speedMultiplier = 1;
+    [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent to upon pressing play.")] private Transform newCameraTarget;
 
     void Start()
     {

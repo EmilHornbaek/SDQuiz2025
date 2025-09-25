@@ -149,6 +149,10 @@ PrefabInstance:
       value: AnimalSelection
       objectReference: {fileID: 0}
     - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
+      propertyPath: mainMenuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: acb943b56556ef947a7e50e1af9ba022, type: 3}
+    - target: {fileID: 6306666827378968245, guid: e124138a10b891144b655798e3810bbb, type: 3}
       propertyPath: speedMultiplier
       value: 1
       objectReference: {fileID: 0}
@@ -305,6 +309,7 @@ MonoBehaviour:
   lerpSwitch: 0
   newCameraTarget: {fileID: 1418559230}
   speedMultiplier: 1
+  newCameraTarget: {fileID: 1418559230}
 --- !u!1001 &1987827756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +330,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: quizMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 1933b53991e74ea4888707976cf82f0b, type: 3}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: maxAttempts
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: victorySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38c42cf9f54c79e4fb5663432d956011, type: 3}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: wrongAnswerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 670cf51966f6cdf41916494abaca702c, type: 3}
+    - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: correctAnswerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: eaa87e99d0a356649a6fa678e70fb8a2, type: 3}
     - target: {fileID: 6457619076089995986, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: quizBackDestination
       value: 

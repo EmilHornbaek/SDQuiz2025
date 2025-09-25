@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
   Name: Horse
   Sprite: {fileID: 2800000, guid: fef4045624d03d041ae9cbb5662c03c9, type: 3}
-  Sound: {fileID: 0}
-  Facts: []
+  Sound: {fileID: 8300000, guid: 0c4318ed7cce72c49a23974b9a3ef3e3, type: 3}
+  Facts:
+  - fact: Horse says NEIGH!
   QuizQuestions:
   - Question: Neigh?
     Answers:

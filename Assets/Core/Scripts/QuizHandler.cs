@@ -3,7 +3,18 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System;
 using Nullzone.Unity.Attributes;
-
+/// <summary>
+/// Manages the flow and logic of a quiz game, including question selection, user interaction, scoring, and game state
+/// transitions.
+/// </summary>
+/// <remarks>This class is responsible for handling all aspects of the quiz gameplay, such as initializing the
+/// quiz, managing the timer, processing user answers, and determining when the game ends. It interacts with the Unity
+/// UI system to update the user interface dynamically and plays audio clips for feedback during the game. The quiz is
+/// based on a set of questions and answers provided by an <see cref="AnimalData"/> object.  The class assumes that the
+/// Unity scene contains the necessary UI elements, such as buttons for answers, labels for displaying the question and
+/// score, and a progress bar for the timer. It also requires audio clips for correct and incorrect answers, as well as
+/// background music for the quiz.  This class is designed to be attached to a Unity GameObject and relies on Unity's
+/// MonoBehaviour lifecycle methods, such as <see cref="Awake"/> and <see cref="Update"/>.</remarks>
 public class QuizHandler : MonoBehaviour
 {
     [Header("Data")]
@@ -14,6 +25,8 @@ public class QuizHandler : MonoBehaviour
     private int numberOfQuestions = 10;
     [SerializeField, Range(1, 120), Tooltip("Time in seconds for each question")]
     private int setTimer = 60;
+    [SerializeField, Tooltip("How many attempts the player has"), Range(1, 3)]
+    private int maxAttempts = 2;
 
     [Header("Audio")]
     [SerializeField] private AudioClip correctAnswerSound;
@@ -22,9 +35,9 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip quizMusic;
 
     [Header("Return Settings")]
-    [SerializeField] private float speedMultiplier = 1;
-    [SerializeField, FieldName("End Screen Duration")] private float returnTimerDuration;
-    [SerializeField, FieldName("Send Camera To:")] private Transform quizBackDestination;
+    [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening after the quiz ends.")] private float speedMultiplier = 1;
+    [SerializeField, FieldName("End Screen Duration"), Tooltip("The amount of time the game waits before returning to the Quiz Selection after completing a quiz. Measured in seconds.")] private float returnTimerDuration;
+    [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent back to after the quiz ends.")] private Transform quizBackDestination;
     private float returnTimer;
     private bool countdown = false;
 
@@ -40,11 +53,19 @@ public class QuizHandler : MonoBehaviour
     private StyleColor originalButtonColor;
     private UIDocument uiDocument;
     private AudioSource audioSource;
-    private bool isQuizDone = false;   // starter som DONE → Update return’er
+    private bool isQuizDone = true;
     private bool firstStart = true;
 
     private VisualElement container;
 
+    public bool IsQuizDone { get => isQuizDone; set => isQuizDone = value; }
+    /// <summary>
+    /// Initializes components and prepares the UI and other dependencies for use.
+    /// </summary>
+    /// <remarks>This method is called automatically by Unity when the script instance is being loaded.  It
+    /// ensures that required components, such as <see cref="AudioSource"/> and <see cref="UIDocument"/>,  are retrieved
+    /// and initialized. Additionally, it sets up the random number generator and collects  references to UI elements,
+    /// such as answer buttons, for later use.</remarks>
     void Awake()
     {
         // Hent komponenter TIDLIGT
@@ -69,7 +90,12 @@ public class QuizHandler : MonoBehaviour
     void Start()
     {
     }
-
+    /// <summary>
+    /// Updates the state of the quiz, managing timers, audio playback, and transitions.
+    /// </summary>
+    /// <remarks>This method should be called regularly, such as in a game loop, to ensure the quiz logic
+    /// progresses correctly. It handles countdown timers, updates the progress bar, plays audio cues, and transitions
+    /// to the next question or state when appropriate.</remarks>
     public void Update()
     {
         if (isQuizDone || firstStart) return;
@@ -106,7 +132,13 @@ public class QuizHandler : MonoBehaviour
             NextQuestion();
         }
     }
-
+    /// <summary>
+    /// Resets the quiz to its initial state, preparing it for a new session.
+    /// </summary>
+    /// <remarks>This method resets all quiz-related data, including the score, question index, and used
+    /// questions.  It also reinitializes the timer, updates the progress bar, and prepares the UI for the first
+    /// question.  If quiz music is configured, it will start playing in a loop. Ensure that the container and its child
+    /// elements, such as buttons and the progress bar, are properly set up before calling this method.</remarks>
     public void ResetQuiz()
     {
         //uiDocument.enabled = true;
@@ -152,7 +184,16 @@ public class QuizHandler : MonoBehaviour
         // Første spørgsmål
         SetupRandomQuestion();
     }
-
+    /// <summary>
+    /// Attempts to select a valid quiz question from the available pool of unused questions.
+    /// </summary>
+    /// <remarks>A valid question is defined as one that has at least one correct answer and at least three
+    /// incorrect answers. The method ensures that the selected question is chosen randomly from the pool of unused
+    /// questions. If no valid question is found, the method returns <see langword="false"/> and <paramref
+    /// name="validQuestion"/>  is set to <see langword="null"/>.</remarks>
+    /// <param name="validQuestion">When this method returns, contains the selected <see cref="QuizQuestion"/> if a valid question is found; 
+    /// otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if a valid question is successfully selected; otherwise, <see langword="false"/>.</returns>
     private bool TryPickValidQuestion(out QuizQuestion validQuestion)
     {
         validQuestion = null;
@@ -185,7 +226,12 @@ public class QuizHandler : MonoBehaviour
 
         return false;
     }
-
+    /// <summary>
+    /// Sets up a random quiz question by selecting a valid, unused question and preparing the UI for user interaction.
+    /// </summary>
+    /// <remarks>This method ensures that the selected question has at least one correct answer and three
+    /// incorrect answers.  It updates the UI elements, including the question text, score display, answer buttons, and
+    /// timer.  If no valid questions remain or the game conditions are met, the game ends.</remarks>
     private void SetupRandomQuestion()
     {
         // 1) Grundtjek
@@ -288,6 +334,17 @@ public class QuizHandler : MonoBehaviour
     // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
     private readonly System.Action[] _buttonHandlers = new System.Action[8]; // antag max 8 svar-knapper; udvid hvis nødvendigt
 
+
+
+    /// <summary>
+    /// Handles the selection of an answer in the quiz, updating the score and progressing the game state based on the
+    /// correctness of the selected answer.
+    /// </summary>
+    /// <remarks>If the selected answer is correct, the score is incremented, and the game progresses to the
+    /// next question.  Additionally, the player's stats are updated if applicable. If the answer is incorrect, the
+    /// number of remaining  attempts is decremented, and the selected answer is visually marked as incorrect. If no
+    /// attempts remain, the game  progresses to the next question.</remarks>
+    /// <param name="index">The index of the selected answer in the list of available answers.</param>
     private void OnAnswerSelected(int index)
     {
         if (currentAnswers[index].Allowed)
@@ -302,7 +359,6 @@ public class QuizHandler : MonoBehaviour
                     PlayerStats.Instance.Overview[animalData].AddPoint();
                 }
             }
-            
             UnsubscribeAllButtons();
             NextQuestion();
         }
@@ -324,7 +380,11 @@ public class QuizHandler : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Unsubscribes all event handlers from the click events of the answer buttons.
+    /// </summary>
+    /// <remarks>This method iterates through the collection of answer buttons and removes the associated
+    /// event handlers  from their click events. Only buttons with non-null handlers are affected.</remarks>
     private void UnsubscribeAllButtons()
     {
         for (int i = 0; i < answerButtons.Count && i < _buttonHandlers.Length; i++)
@@ -333,13 +393,18 @@ public class QuizHandler : MonoBehaviour
                 answerButtons[i].clicked -= _buttonHandlers[i];
         }
     }
-
+    /// <summary>
+    /// Advances to the next question in the quiz. If the quiz is complete, ends the game.
+    /// </summary>
+    /// <remarks>This method increments the current question index and determines whether the quiz should
+    /// continue  or end based on the number of questions and the used questions. If the quiz is complete, it plays  a
+    /// victory sound (if configured) and ends the game. Otherwise, it sets up the next question with  a default maximum
+    /// number of answers.</remarks>
     private void NextQuestion()
     {
         currentQuestionIndex++;
         if (currentQuestionIndex >= numberOfQuestions)
         {
-            if (audioSource && victorySound) audioSource.PlayOneShot(victorySound);
             EndGame();
             return;
         }
@@ -349,23 +414,45 @@ public class QuizHandler : MonoBehaviour
             EndGame();
             return;
         }
-        maxAnswers = 2;
+        maxAnswers = maxAttempts;
         SetupRandomQuestion();
     }
-
+    /// <summary>
+    /// Ends the game and displays the final score and a random fact about the animal.
+    /// </summary>
+    /// <remarks>This method updates the UI to show the end screen, including the player's final score  and a
+    /// randomly selected fact. It also initiates a countdown timer for returning to the main menu.</remarks>
     private void EndGame()
     {
         // TODO: Vis endeskærm
 
         //uiDocument.enabled = false;
+        if (audioSource && victorySound) audioSource.PlayOneShot(victorySound);
         LerpHandler lh = LerpHandler.Instance;
         lh.MoveObjects(LerpState.QuizEnd, false, null, speedMultiplier);
         returnTimer = returnTimerDuration;
+        if (animalData.Facts.Length != 0)
+        {
+            container.Q<Label>("Question").text = animalData.Facts[random.Next(0, animalData.Facts.Length)].fact;
+        }
+        container.Q<Label>("Score").text = $"Din endelige score er: {score} ud af {currentQuestionIndex}";
+        for (int i = 0; i < answerButtons.Count; i++)
+        {
+            answerButtons[i].style.display = DisplayStyle.None;
+        }
         countdown = true;
     }
-
+    /// <summary>
+    /// Sets the animal data for the current instance.
+    /// </summary>
+    /// <param name="data">The <see cref="AnimalData"/> object containing the animal's information. Cannot be <see langword="null"/>.</param>
     public void SetAnimalData(AnimalData data) => animalData = data;
-
+    /// <summary>
+    /// Resets the state of all answer buttons by removing event handlers and clearing visual indicators.
+    /// </summary>
+    /// <remarks>This method detaches any previously assigned click event handlers from the answer buttons 
+    /// and removes the "wrong-answer" visual class from each button. It ensures that the buttons  are in a clean state
+    /// for reuse.</remarks>
     private void ResetAnswers()
     {
         for (int i = 0; i < answerButtons.Count; i++)
@@ -376,10 +463,18 @@ public class QuizHandler : MonoBehaviour
             answerButtons[i].EnableInClassList("wrong-answer", false);
         }
     }
-
+    /// <summary>
+    /// Randomizes the order of elements in the specified collection.
+    /// </summary>
+    /// <remarks>The method uses a pseudo-random number generator to shuffle the elements. The degree of
+    /// shuffling  is influenced by the current system time and other factors, which may result in varying levels of
+    /// randomness.</remarks>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <param name="collection">The collection to shuffle. The collection is modified in place.</param>
+    /// <returns>The shuffled collection.</returns>
     private List<T> Shuffle<T>(List<T> collection)
     {
-        int shuffleDepth = DateTime.Now.Millisecond - (int)(Time.deltaTime*10f);
+        int shuffleDepth = DateTime.Now.Millisecond - (int)(Time.deltaTime * 10f);
         if (shuffleDepth < 0) shuffleDepth *= -1;
         for (int i = collection.Count - 1; i > 0 && shuffleDepth > 0; i--, shuffleDepth--)
         {
