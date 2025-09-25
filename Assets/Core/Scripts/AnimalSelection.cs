@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
-    [SerializeField, FieldName("Send Camera To:")] private Transform animalButtonDestination;
-    [SerializeField] private LerpState lerpSwitch = LerpState.QuizSelect;
+    [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening upon selecting a quiz.")] private float speedMultiplier = 1;
+    [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent to upon selecting a quiz.")] private Transform animalButtonDestination;
+    private LerpState lerpSwitch = LerpState.QuizSelect;
     private Dictionary<Label, AnimalData> pointLabelLink = new Dictionary<Label, AnimalData>();
     private AudioSource audioSource;
-    [SerializeField] private float speedMultiplier = 1;
 
     private VisualElement mainElement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

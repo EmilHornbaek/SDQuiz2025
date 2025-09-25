@@ -10,12 +10,12 @@ public enum MovementType
 
 public class LerpMotion : MonoBehaviour
 {
-    public Transform targetTransform;
-    [SerializeField] private bool lockZPosition = true;
-    [SerializeField] private float duration = 1;
-    [SerializeField] private MovementType lerpMethod = MovementType.Cubic;
-    public LerpState lerpCondition;
-    [SerializeField] private bool hideWhenIdle = false;
+    [Tooltip("Where the object should move to when played.")] public Transform targetTransform;
+    [SerializeField, Tooltip("Locks the Z position of the object. This should generally be enabled when working in 2D.")] private bool lockZPosition = true;
+    [SerializeField, Tooltip("How long the movement of the object should take. Measured in seconds.")] private float duration = 1;
+    [SerializeField, Tooltip("Selecting cubic will cause the object to ease in and out of its movement. Linear will give a flat, constant movement.")] private MovementType lerpMethod = MovementType.Cubic;
+    [Tooltip("Determines when this object's movement is triggered.")] public LerpState lerpCondition;
+    [SerializeField, Tooltip("If enabled, the object will only be rendered while moving.")] private bool hideWhenIdle = false;
     private TransformSnapshot originalTransform;
     private float elapsedTime;
     private float timeCompletion;

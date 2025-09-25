@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UpgradeStage : MonoBehaviour
 {
-    [SerializeField] private int showCondition;
+    [SerializeField, Tooltip("This object will be shown once the player's total score is equal to or greater than this value.")] private int showCondition;
     private SpriteRenderer sr;
 
     void Start()
