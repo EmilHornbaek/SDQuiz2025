@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Unity;
+using UnityEngine.UIElements;
 
 public class PlayerStats
 {
@@ -41,9 +43,12 @@ public class PointData
                 NewAmount = value
             });
             points = value;
+            if (PointLabel is not null) PointLabel.text = $"{Points} / {MaxPoints}";
         }
     }
     public int MaxPoints { get; private set; }
+
+    public Label PointLabel { get; private set; }
 
     public void AddPoint()
     {
@@ -58,5 +63,11 @@ public class PointData
     public void SetMaxPoints(int maxPoints)
     {
         MaxPoints = maxPoints;
+    }
+
+    internal void SetLabel(UnityEngine.UIElements.Label label)
+    {
+        this.PointLabel = label;
+        if (PointLabel is not null) PointLabel.text = $"{Points} / {MaxPoints}";
     }
 }

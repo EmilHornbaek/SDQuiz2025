@@ -10,7 +10,6 @@ public class AnimalSelection : MonoBehaviour
 {
     [SerializeField, FieldName("Send Camera To:")] private Transform animalButtonDestination;
     [SerializeField] private LerpState lerpSwitch = LerpState.QuizSelect;
-    private Dictionary<Label, AnimalData> pointLabelLink = new Dictionary<Label, AnimalData>();
     private AudioSource audioSource;
     [SerializeField] private float speedMultiplier = 1;
 
@@ -20,7 +19,7 @@ public class AnimalSelection : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        AnimalData[] animals = AssetUtility.GetAllAssetsOfType<AnimalData>().ToArray();
+        AnimalData[] animals = Resources.LoadAll<AnimalData>("ScriptableObjects");
         UIDocument ui = GetComponent<UIDocument>();
         var root = ui.rootVisualElement;
         mainElement = root.Q<VisualElement>("animal-container");
@@ -33,13 +32,18 @@ public class AnimalSelection : MonoBehaviour
         {
             PointData point = new PointData();
             point.SetMaxPoints(animal.QuizQuestions.Length);
-            PlayerStats.Instance.Overview.Add(animal, point);
+
+            if (!PlayerStats.Instance.Overview.ContainsKey(animal))
+                PlayerStats.Instance.Overview.Add(animal, point);
+            
             VisualElement instance = template?.visualTreeAssetSource.Instantiate();
             AspectRatioElement aspectRatioElement = instance?.Q<AspectRatioElement>(name: "AspectRatioElement");
             Button button = aspectRatioElement?.Q<Button>(name: "AnimalButton");
             Label label = aspectRatioElement?.Q<Label>(name: "PointLabel");
 
-            if (button is null || aspectRatioElement is null || mainElement is null || label is null) return;
+            point.SetLabel(label);
+
+            if (button is null || aspectRatioElement is null || mainElement is null || label is null) continue;
 
             if (animal.Sprite == null)
             {
@@ -54,8 +58,6 @@ public class AnimalSelection : MonoBehaviour
             button.clicked += () => GoToQuiz(animal);
             label.text = $"{PlayerStats.Instance.Overview[animal].Points} / {PlayerStats.Instance.Overview[animal].MaxPoints}";
 
-            pointLabelLink.Add(label, animal);
-
             mainElement.Add(aspectRatioElement);
         }
 
@@ -64,10 +66,6 @@ public class AnimalSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (KeyValuePair<Label, AnimalData> item in pointLabelLink)
-        {
-            item.Key.text = $"{PlayerStats.Instance.Overview[item.Value].Points} / {PlayerStats.Instance.Overview[item.Value].MaxPoints}";
-        }
     }
 
     private void GoToQuiz(AnimalData animalData)

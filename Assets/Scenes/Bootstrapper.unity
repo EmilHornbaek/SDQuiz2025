@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159851c9ef4b4b24287a5b9e3f111382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BootStrapper
-  mainScene: {fileID: 102900000, guid: 38de0955b9189ab4f9b3eb9f34ff4af5, type: 3}
-  uiScene: {fileID: 102900000, guid: e19bfddd6254c804c8c51646b6b42415, type: 3}
+  mainScene:
+    scenePath: Assets/Scenes/Main.unity
+  uiScene:
+    scenePath: Assets/Scenes/UI.unity
 --- !u!4 &2101116720
 Transform:
   m_ObjectHideFlags: 0

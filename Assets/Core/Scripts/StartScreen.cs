@@ -5,6 +5,7 @@ using Nullzone.Unity.Attributes;
 
 public class StartScreen : MonoBehaviour
 {
+    [SerializeField] private StyleSheet style;
     [SerializeField] private LerpState lerpSwitch;
     [SerializeField, FieldName("Send Camera To:")] private Transform newCameraTarget;
     [SerializeField] private float speedMultiplier = 1;
@@ -19,5 +20,7 @@ public class StartScreen : MonoBehaviour
             LerpHandler lh = LerpHandler.Instance;
             lh.MoveObjects(lerpSwitch, false, newCameraTarget, speedMultiplier);
         };
+        root.styleSheets.Clear();
+        if (style is not null) root.styleSheets.Add(style);
     }
 }

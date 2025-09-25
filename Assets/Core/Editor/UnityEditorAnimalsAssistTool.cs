@@ -47,7 +47,7 @@ public class UnityEditorAnimalsAssistTool
 
     public static object CreateData(string dataName)
     {
-        string folder = "Assets/Content/Animals/ScriptableObjects";
+        string folder = "Assets/Content/Animals/Resources/ScriptableObjects";
         string variantPath = AssetDatabase.GenerateUniqueAssetPath($"{folder}/{dataName}.asset");
 
         AnimalData scriptableObject = ScriptableObject.CreateInstance<AnimalData>();
