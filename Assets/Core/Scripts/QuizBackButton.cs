@@ -4,8 +4,8 @@ using UnityEngine.UIElements;
 
 public class QuizBackButton : MonoBehaviour
 {
-    [SerializeField, FieldName("Send Camera To:")] private Transform quizBackDestination;
-    [SerializeField] private float speedMultiplier = 1;
+    [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent to upon exiting a quiz.")] private Transform quizBackDestination;
+    [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening upon exiting a quiz.")] private float speedMultiplier = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

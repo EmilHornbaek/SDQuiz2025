@@ -22,9 +22,9 @@ public class QuizHandler : MonoBehaviour
     [SerializeField] private AudioClip quizMusic;
 
     [Header("Return Settings")]
-    [SerializeField] private float speedMultiplier = 1;
-    [SerializeField, FieldName("End Screen Duration")] private float returnTimerDuration;
-    [SerializeField, FieldName("Send Camera To:")] private Transform quizBackDestination;
+    [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening after the quiz ends.")] private float speedMultiplier = 1;
+    [SerializeField, FieldName("End Screen Duration"), Tooltip("The amount of time the game waits before returning to the Quiz Selection after completing a quiz. Measured in seconds.")] private float returnTimerDuration;
+    [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent back to after the quiz ends.")] private Transform quizBackDestination;
     private float returnTimer;
     private bool countdown = false;
 
