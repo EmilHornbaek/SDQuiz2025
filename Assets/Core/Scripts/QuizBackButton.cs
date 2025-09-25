@@ -18,6 +18,7 @@ public class QuizBackButton : MonoBehaviour
             backButton.clicked += () =>
             {
                 LerpHandler lh = LerpHandler.Instance;
+                GetComponent<AudioSource>()?.Stop();
                 lh.MoveObjects(LerpState.QuizSelect, true, quizBackDestination, speedMultiplier);
             };
         }
