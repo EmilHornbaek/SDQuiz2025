@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class AnimalSelection : MonoBehaviour
 {
+    [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField, Tooltip("Speeds up or slows down all LerpMotion happening upon selecting a quiz.")] private float speedMultiplier = 1;
     [SerializeField, FieldName("Send Camera To:"), Tooltip("Do not touch. The transform which the camera is sent to upon selecting a quiz.")] private Transform animalButtonDestination;
     private LerpState lerpSwitch = LerpState.QuizSelect;
@@ -64,6 +65,13 @@ public class AnimalSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (animalButtonDestination.gameObject.GetComponent<QuizHandler>().IsQuizDone && mainMenuMusic != null && !audioSource.isPlaying)
+        {
+            audioSource.clip = mainMenuMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        } 
+        QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();
         foreach (KeyValuePair<Label, AnimalData> item in pointLabelLink)
         {
             item.Key.text = $"{PlayerStats.Instance.Overview[item.Value].Points} / {PlayerStats.Instance.Overview[item.Value].MaxPoints}";
@@ -72,11 +80,16 @@ public class AnimalSelection : MonoBehaviour
 
     private void GoToQuiz(AnimalData animalData)
     {
+        if (mainMenuMusic != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
         if (audioSource != null && animalData.Sound != null)
         {
             audioSource.PlayOneShot(animalData.Sound);
         }
-
+        
         LerpHandler lh = LerpHandler.Instance;
         lh.MoveObjects(lerpSwitch, false, animalButtonDestination, speedMultiplier);
         QuizHandler quizHandler = animalButtonDestination.gameObject.GetComponent<QuizHandler>();

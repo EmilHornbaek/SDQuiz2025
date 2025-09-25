@@ -53,10 +53,12 @@ public class QuizHandler : MonoBehaviour
     private StyleColor originalButtonColor;
     private UIDocument uiDocument;
     private AudioSource audioSource;
-    private bool isQuizDone = false;   // starter som DONE → Update return’er
+    private bool isQuizDone = true;
     private bool firstStart = true;
 
     private VisualElement container;
+
+    public bool IsQuizDone { get => isQuizDone; set => isQuizDone = value; }
     /// <summary>
     /// Initializes components and prepares the UI and other dependencies for use.
     /// </summary>
@@ -331,6 +333,9 @@ public class QuizHandler : MonoBehaviour
 
     // Gemmer stabile delegates til korrekt afmelding (lambda ≠ lambda)
     private readonly System.Action[] _buttonHandlers = new System.Action[8]; // antag max 8 svar-knapper; udvid hvis nødvendigt
+
+
+
     /// <summary>
     /// Handles the selection of an answer in the quiz, updating the score and progressing the game state based on the
     /// correctness of the selected answer.
