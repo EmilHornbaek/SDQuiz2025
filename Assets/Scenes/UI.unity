@@ -361,6 +361,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: m_Pivot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -375,6 +379,10 @@ PrefabInstance:
     - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: m_WorldSpaceHeight
       value: 844
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636663369304623647, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
+      propertyPath: m_PivotReferenceSize
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7899907837563869260, guid: b2c6f67b3757533409b56931741b1fa3, type: 3}
       propertyPath: m_LocalPosition.x
