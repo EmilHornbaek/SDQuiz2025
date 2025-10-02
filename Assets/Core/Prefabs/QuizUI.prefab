@@ -72,6 +72,7 @@ MonoBehaviour:
   animalData: {fileID: 0}
   numberOfQuestions: 10
   setTimer: 60
+  maxAttempts: 2
   correctAnswerSound: {fileID: 0}
   wrongAnswerSound: {fileID: 0}
   victorySound: {fileID: 0}
