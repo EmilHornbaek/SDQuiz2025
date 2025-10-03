@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: 5044bcd9de6c3164a95735d79c8d122c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3505237825879791904
+    second: Poter_5_0
+  - first:
+      213: -8571425718990660972
+    second: Poter_5_1
+  - first:
+      213: 8566918649646753932
+    second: Poter_5_2
+  - first:
+      213: 7190535952705234552
+    second: Poter_5_3
+  - first:
+      213: 39793936079991320
+    second: Poter_5_4
+  - first:
+      213: 5094389812587381123
+    second: Poter_5_5
+  - first:
+      213: -4057221463004308123
+    second: Poter_5_6
+  - first:
+      213: 2250708984271884433
+    second: Poter_5_7
+  - first:
+      213: 140869167027166090
+    second: Poter_5_8
+  - first:
+      213: 8513734188658778185
+    second: Poter_5_9
+  - first:
+      213: -7332521090103670631
+    second: Poter_5_10
+  - first:
+      213: -2982901771256640519
+    second: Poter_5_11
+  - first:
+      213: 7779223175080509446
+    second: Poter_5_12
+  - first:
+      213: 8223881034954872257
+    second: Poter_5_13
+  - first:
+      213: -1622026893675281299
+    second: Poter_5_14
+  - first:
+      213: 2429418550222441571
+    second: Poter_5_15
+  - first:
+      213: 836458367171522982
+    second: Poter_5_16
+  - first:
+      213: -6960975428517528903
+    second: Poter_5_17
+  - first:
+      213: 8484616481673235980
+    second: Poter_5_18
+  - first:
+      213: -2628945180321793583
+    second: Poter_5_19
+  - first:
+      213: -4861993024527207103
+    second: Poter_5_20
+  - first:
+      213: -2845346850134563297
+    second: Poter_5_21
+  - first:
+      213: -3565793840929878015
+    second: Poter_5_22
+  - first:
+      213: -7822926527086009064
+    second: Poter_5_23
+  - first:
+      213: -5254395389152759050
+    second: Poter_5_24
+  - first:
+      213: 4016013025693822021
+    second: Poter_5_25
+  - first:
+      213: -2077988958909706386
+    second: Poter_5_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Poter_5_0
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 207
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e62c27d4c4ea5fc0800000000000000
+      internalID: -3505237825879791904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_1
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 199
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49a1ae0d8bd2c0980800000000000000
+      internalID: -8571425718990660972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 194
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c882dd35f1fc3e670800000000000000
+      internalID: 8566918649646753932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 178
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 876aba51a5ae9c360800000000000000
+      internalID: 7190535952705234552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_4
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 171
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8123340cf506d8000800000000000000
+      internalID: 39793936079991320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_5
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 169
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 381c3a61b88e2b640800000000000000
+      internalID: 5094389812587381123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_6
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 134
+        width: 39
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56d9982539ad1b7c0800000000000000
+      internalID: -4057221463004308123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_7
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 165
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1905e4c75ef1c3f10800000000000000
+      internalID: 2250708984271884433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_8
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 141
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b9574d2c774f100800000000000000
+      internalID: 140869167027166090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_9
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 89
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940ea1b032cd62670800000000000000
+      internalID: 8513734188658778185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_10
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 74
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9988f4cfae6ad3a90800000000000000
+      internalID: -7332521090103670631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_11
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 98
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fb4d54a4aa9a96d0800000000000000
+      internalID: -2982901771256640519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_12
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 87
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600092bf24a55fb60800000000000000
+      internalID: 7779223175080509446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_13
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 72
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c59e83ba38112270800000000000000
+      internalID: 8223881034954872257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_14
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 64
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d64ca5252276d79e0800000000000000
+      internalID: -1622026893675281299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_15
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 70
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36cc0c0cc4707b120800000000000000
+      internalID: 2429418550222441571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_16
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 64
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a179a40472bb9b00800000000000000
+      internalID: 836458367171522982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_17
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 59
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ba7df48ab5a56f90800000000000000
+      internalID: -6960975428517528903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_18
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 43
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ece859cb96fb570800000000000000
+      internalID: 8484616481673235980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_19
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 35
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d9b1f8894c148bd0800000000000000
+      internalID: -2628945180321793583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_20
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 33
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 145f0a8aa1bb68cb0800000000000000
+      internalID: -4861993024527207103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_21
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 37
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f16e3f67d1c4388d0800000000000000
+      internalID: -2845346850134563297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 55
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1005911e461c38ec0800000000000000
+      internalID: -3565793840929878015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 33
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 815ee0175c16f6390800000000000000
+      internalID: -7822926527086009064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f279188b33a417b0800000000000000
+      internalID: -5254395389152759050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_25
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 30
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54c62d1b19ebbb730800000000000000
+      internalID: 4016013025693822021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poter_5_26
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 6
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6fc0013d008923e0800000000000000
+      internalID: -2077988958909706386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Poter_5_0: -3505237825879791904
+      Poter_5_1: -8571425718990660972
+      Poter_5_10: -7332521090103670631
+      Poter_5_11: -2982901771256640519
+      Poter_5_12: 7779223175080509446
+      Poter_5_13: 8223881034954872257
+      Poter_5_14: -1622026893675281299
+      Poter_5_15: 2429418550222441571
+      Poter_5_16: 836458367171522982
+      Poter_5_17: -6960975428517528903
+      Poter_5_18: 8484616481673235980
+      Poter_5_19: -2628945180321793583
+      Poter_5_2: 8566918649646753932
+      Poter_5_20: -4861993024527207103
+      Poter_5_21: -2845346850134563297
+      Poter_5_22: -3565793840929878015
+      Poter_5_23: -7822926527086009064
+      Poter_5_24: -5254395389152759050
+      Poter_5_25: 4016013025693822021
+      Poter_5_26: -2077988958909706386
+      Poter_5_3: 7190535952705234552
+      Poter_5_4: 39793936079991320
+      Poter_5_5: 5094389812587381123
+      Poter_5_6: -4057221463004308123
+      Poter_5_7: 2250708984271884433
+      Poter_5_8: 140869167027166090
+      Poter_5_9: 8513734188658778185
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
