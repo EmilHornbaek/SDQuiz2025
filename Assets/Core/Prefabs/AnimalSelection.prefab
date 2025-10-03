@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c230b944a59e27f4c9f1be28e5128c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalSelector
+  buttonTemplate: {fileID: 0}
   mainMenuMusic: {fileID: 0}
   speedMultiplier: 1
   animalButtonDestination: {fileID: 0}
